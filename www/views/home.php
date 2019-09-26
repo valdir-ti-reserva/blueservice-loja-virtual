@@ -1,1 +1,3 @@
-Conteúdo da página inicial
+<?php
+
+echo '<h2>Home page</h2>';
