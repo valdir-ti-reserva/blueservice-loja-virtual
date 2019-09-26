@@ -6,7 +6,7 @@ global $db;
 
 $config = array();
 if(ENVIRONMENT == 'development') {
-	define("BASE_URL", "http://localhost:8001/");
+	define("BASE_URL", "http://localhost:8001/loja/");
 	$host 				      = $_SERVER['REMOTE_ADDR'];
 	$config['dbname'] 	= 'loja';
 	$config['host'] 	  = $host;
