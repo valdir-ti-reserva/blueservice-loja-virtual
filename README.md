@@ -1,12 +1,12 @@
 # docker
 
-Exemplo Docker com Apache, MySql 8.0, PhpMyAdmin e Php
+Docker com Apache, MySql 8.0, PhpMyAdmin e Php
 
 - Você pode utilizar o MariaDB 10.1 se você alterar a tag `mariadb-10.1`
-
 - Você pode utilizar o MySql 5.7 se você alterar a tag `mysql5.7`
 
-Utilize o docker-compose para rodar seus containers.
+- Clone ou faça o download do projeto 
+- Rode o comando abaixo de dentro da pasta com o docker-compose
 
 ```
 docker-compose up -d
