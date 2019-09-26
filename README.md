@@ -15,7 +15,7 @@ docker-compose up -d
 
 Acesse o phpmyadmin em http://localhost:8000
 
-Abra o browser em http://localhost:8001
+Abra o browser em http://localhost:8001/loja
 
 Para acessar o cliente mysql:
 
