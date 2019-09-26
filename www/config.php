@@ -7,15 +7,15 @@ global $db;
 $config = array();
 if(ENVIRONMENT == 'development') {
 	define("BASE_URL", "http://localhost:8001/");
-	$host 				= $_SERVER['REMOTE_ADDR'];
+	$host 				      = $_SERVER['REMOTE_ADDR'];
 	$config['dbname'] 	= 'loja';
-	$config['host'] 	= $host;
+	$config['host'] 	  = $host;
 	$config['dbuser'] 	= 'root';
 	$config['dbpass'] 	= 'root';
 } else {
 	define("BASE_URL", "http://localhost/nova_loja/");
 	$config['dbname'] 	= 'nova_loja';
-	$config['host'] 	= 'localhost';
+	$config['host'] 	  = 'localhost';
 	$config['dbuser'] 	= 'root';
 	$config['dbpass'] 	= 'root';
 }

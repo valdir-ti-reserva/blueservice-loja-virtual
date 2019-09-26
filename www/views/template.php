@@ -38,7 +38,7 @@
 					<div class="col-sm-7">
 						<div class="head_help">(11) 9999-9999</div>
 						<div class="head_email">contato@<span>loja2.com.br</span></div>
-						
+
 						<div class="search_area">
 							<form method="GET">
 								<input type="text" name="s" required placeholder="Procure um item" autocomplete="off"/>
