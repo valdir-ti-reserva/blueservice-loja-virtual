@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 27/09/2019 às 01:35
+-- Tempo de geração: 27/09/2019 às 02:17
 -- Versão do servidor: 8.0.17
 -- Versão do PHP: 7.2.14
 
@@ -136,7 +136,7 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `id_category`, `id_brand`, `name`, `description`, `stock`, `price`, `price_from`, `rating`, `featured`, `sale`, `bestseller`, `new_product`, `options`) VALUES
 (1, 1, 1, 'Monitor 21\"', 'Descrição do monitor', 10, 499, 599, 0, 0, 1, 1, 0, NULL),
 (2, 1, 2, 'Monitor 18\"', 'Descrição do outro monitor', 10, 399, 499, 0, 0, 0, 0, 0, NULL),
-(3, 1, 1, 'Monitor 23\"', 'Descrição do outro monitor', 10, 399, 466, 0, 0, 1, 1, 0, NULL),
+(3, 1, 1, 'Monitor 23\"', 'Descrição do outro monitor', 10, 399, 466, 0, 0, 1, 0, 0, NULL),
 (4, 2, 2, 'Monitor 19\"', 'Descrição do outro monitor', 10, 125, 0, 0, 0, 0, 0, 0, NULL),
 (5, 2, 1, 'Monitor 14\"', 'Descrição do outro monitor', 10, 500, 300, 0, 0, 0, 0, 1, NULL),
 (6, 2, 2, 'Monitor 20\"', 'Descrição do outro monitor', 10, 325, 300, 0, 0, 0, 1, 0, NULL),
@@ -161,13 +161,13 @@ CREATE TABLE `products_images` (
 
 INSERT INTO `products_images` (`id`, `id_product`, `url`) VALUES
 (1, 1, '3.jpg'),
-(2, 3, '2.jpg'),
+(2, 3, '3.jpg'),
 (3, 2, '7.jpg'),
-(4, 4, '6.jpg'),
-(5, 8, '2.jpg'),
-(6, 7, '1.jpg'),
-(7, 5, '4.jpg'),
-(8, 6, '5.jpg');
+(4, 4, '3.jpg'),
+(5, 8, '7.jpg'),
+(6, 7, '8.jpg'),
+(7, 5, '7.jpg'),
+(8, 6, '3.jpg');
 
 -- --------------------------------------------------------
 

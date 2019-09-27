@@ -1,19 +1,19 @@
 <div class="product_item">
 
-    <a href="">
+    <a href="#">
 
       <div class="product_tags">
 
         <?php if($sale == 1):?>
-          <div class="product_tag product_tag_red">Promoção</div>
+          <div class="product_tag product_tag_red">PROMOÇÃO</div>
         <?php endif?>
 
         <?php if($bestseller == 1):?>
-          <div class="product_tag product_tag_green">Mais Vendidos</div>
+          <div class="product_tag product_tag_green">MAIS VENDIDOS</div>
         <?php endif?>
 
         <?php if($new_product == 1):?>
-          <div class="product_tag product_tag_blue">Novo</div>
+          <div class="product_tag product_tag_blue">NOVO</div>
         <?php endif?>
 
       </div>

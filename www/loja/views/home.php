@@ -6,13 +6,9 @@
 
   <?php foreach($list as $item):?>
 
-    <div class="col-sm-4">
-
-      <div class="product_item">
+    <div class="col-sm-4 item-height">
 
         <?php $this->loadView('product_item', $item); ?>
-
-      </div>
 
     </div>
 
@@ -27,4 +23,10 @@
 
   <?php endforeach?>
 
+</div>
+
+<div class="paginationArea">
+  <?php for($q=1;$q<=$numPages;$q++):?>
+  <div class="pagination_item <?=($currentPage==$q)?'pag_active':''?>"><a href="<?=BASE_URL?>?p=<?=$q?>"><?=$q?></a></div>
+  <?php endfor?>
 </div>
