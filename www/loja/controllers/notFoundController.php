@@ -1,6 +1,7 @@
 <?php
 
-class notFoundController extends Controller {
+class notFoundController extends Controller
+{
 
     public function __construct() {
         parent::__construct();
@@ -8,7 +9,7 @@ class notFoundController extends Controller {
 
     public function index() {
         $dados = array();
-        
+
         $this->loadView('404', $dados);
     }
 

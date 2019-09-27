@@ -291,5 +291,59 @@ footer h3 {
 	padding:0;
 }
 
+/*PRODUTOS*/
+.product_item{
+  padding: 10px;
+}
+.product_item:hover{
+  background-color: #eee;
+}
+.product_item a{
+  text-decoration: none;
+  display: block;
+}
+.product_tags{
+  position: absolute;
+}
+.product_tag{
+  background: #fff;
+  height: 30px;
+  line-height: 30px;
+  display: inline-block;
+  float: left;
+  color: #fff;
+  clear: both;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+}
+.product_tag_red{
+  background-color: #ff0000;
+}
+.product_tag_green{
+  background: #00FF00;
+}
+.product_tag_blue{
+  background: #0000FF;
+}
+.product_name{
+  color: #0000ff;
+  font-weight: bold;
+}
 
-
+.product_brand{
+  color: #000;
+  font-size: 11px;
+}
+.product_price_from{
+  float: left;
+  color: #ccc;
+  font-size: 12px;
+  margin-top: 15px;
+}
+.product_price{
+  float: right;
+  color: #000;
+  font-weight: bold;
+  margin-top: 15px;
+}

@@ -13,14 +13,14 @@
 			<div class="container">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="<?php echo BASE_URL; ?>">Home</a></li>
-					<li><a href="<?php echo BASE_URL; ?>contact">Contact</a></li>
+					<li><a href="<?php echo BASE_URL; ?>contact">Contato</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">English
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Inglês
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">English</a></li>
+							<li><a href="#">Inglês</a></li>
 							<li><a href="#">Português</a></li>
 							<li><a href="#">Espanhol</a></li>
 						</ul>
@@ -139,9 +139,9 @@
 	    			<div class="row">
 						<div class="col-xs-12 col-sm-8 col-sm-offset-2 no-padding">
 							<form method="POST">
-                                <input class="subemail" name="email" placeholder="Subscribe to our newsletter">
-                                <input type="submit" value="Subscribe" />
-                            </form>
+                  <input class="subemail" name="email" placeholder="Subscribe to our newsletter">
+                  <input type="submit" value="Subscribe" />
+              </form>
 						</div>
 					</div>
 	    		</div>
