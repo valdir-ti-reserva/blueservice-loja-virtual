@@ -11,7 +11,7 @@
 
   <?php
     if(count($sub['subs']) > 0){
-      $this->loadView('menu_subcategorie', array(
+      $this->loadView('menu_subcategory', array(
         'subs'  => $sub['subs'],
         'level' => $level + 1
       ));

@@ -28,6 +28,7 @@ class homeController extends Controller
         $dados['numPages']        = ceil($dados['totalItems'] / $limit);
         $dados['currentPage']     = $currentPage;
         $dados['categories']      = $categories->getList();
+        $dados['maxSlider']       = 600;
 
         $this->loadTemplate('home', $dados);
     }

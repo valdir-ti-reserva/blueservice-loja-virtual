@@ -5,8 +5,14 @@
 		<title>Loja Virtual</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" type="text/css" />
-		<link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/jquery-ui.structure.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/jquery-ui.theme.css" type="text/css" />
+
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" type="text/css" />
+
 	</head>
 	<body>
 		<nav class="navbar topnav">
@@ -40,10 +46,27 @@
 						<div class="head_email">contato@<span>loja2.com.br</span></div>
 
 						<div class="search_area">
-							<form method="GET">
+							<form method="GET" action="<?=BASE_URL?>search">
 								<input type="text" name="s" required placeholder="Procure um item" autocomplete="off"/>
 								<select name="category">
-									<option value="">Todas as Categorias</option>
+                  <option value="">Todas as Categorias</option>
+
+                  <?php foreach($viewData['categories'] as $cat):?>
+
+                    <option value="<?=$cat['id']?>"><?=$cat['name']?></option>
+
+                    <?php
+                      if(count($cat['subs']) > 0){
+                        $this->loadView('search_subcategory', array(
+                          'subs'  => $cat['subs'],
+                          'level' => 1
+                        ));
+
+                      }
+                    ?>
+
+                  <?php endforeach ?>
+
 								</select>
 								<input type="submit" value=""/>
 						    </form>
@@ -87,7 +110,7 @@
 
                           if(count($cat['subs']) > 0){
 
-                            $this->loadView('menu_subcategorie', array(
+                            $this->loadView('menu_subcategory', array(
                               'subs'  => $cat['subs'],
                               'level' => 1
                             ));
@@ -118,17 +141,67 @@
 				<div class="row">
 				  <div class="col-sm-3">
 				  	<aside>
-				  		<h1>Filtro</h1>
+				  		<h1>Filtros</h1>
 				  		<div class="filterarea">
+
+                <div class="filterbox">
+                  <div class="filtertitle">Marcas</div>
+                  <div class="filtercontent">
+
+                    ...
+
+                  </div>
+                </div>
+
+                <div class="filterbox">
+                  <div class="filtertitle">Preço</div>
+                  <div class="filtercontent">
+
+                    <p>
+                      <input type="text" id="amount" readonly>
+                    </p>
+
+                    <div id="slider-range"></div>
+
+                  </div>
+                </div>
+
+                <div class="filterbox">
+                  <div class="filtertitle">Estrelas</div>
+                  <div class="filtercontent">
+
+                    ...
+
+                  </div>
+                </div>
+
+                <div class="filterbox">
+                  <div class="filtertitle">Promoção</div>
+                  <div class="filtercontent">
+
+                    ...
+
+                  </div>
+                </div>
+
+                <div class="filterbox">
+                  <div class="filtertitle">Opções</div>
+                  <div class="filtercontent">
+
+                    ...
+
+                  </div>
+                </div>
 
 				  		</div>
 
-				  		<div class="widget">
+				  		<!-- <div class="widget">
 				  			<h1>Featured Products</h1>
 				  			<div class="widget_body">
 				  				...
 				  			</div>
-				  		</div>
+              </div> -->
+
 				  	</aside>
 				  </div>
 				  <div class="col-sm-9"><?php $this->loadViewInTemplate($viewName, $viewData); ?></div>
@@ -240,9 +313,13 @@
 	    		</div>
 	    	</div>
 	    </footer>
-		<script type="text/javascript">var BASE_URL = '<?php echo BASE_URL; ?>';</script>
-		<script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery.min.js"></script>
+    <script type="text/javascript">
+      var BASE_URL  = '<?php echo BASE_URL; ?>';
+      var maxSlider = <?=$viewData['maxSlider']?>;
+    </script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/script.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/script.js"></script>
 	</body>
 </html>
