@@ -73,9 +73,29 @@
 					        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Selecione Uma Categoria
 					        <span class="caret"></span></a>
 					        <ul class="dropdown-menu">
-					          <li><a href="#">Page 1-1</a></li>
-					          <li><a href="#">Page 1-2</a></li>
-					          <li><a href="#">Page 1-3</a></li>
+
+
+                      <?php foreach($viewData['categories'] as $cat):?>
+
+                        <li>
+                          <a href="<?=BASE_URL?>categories/enter/<?=$cat['id']?>">
+                            <?=$cat['name']?>
+                          </a>
+                        </li>
+
+                        <?php
+
+                          if(count($cat['subs']) > 0){
+
+                            $this->loadView('menu_subcategorie', array(
+                              'subs'  => $cat['subs'],
+                              'level' => 1
+                            ));
+
+                          }
+                        ?>
+                      <?php endforeach ?>
+
 					        </ul>
 					      </li>
 						<li><a href="#">Categoria X</a></li>

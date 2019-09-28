@@ -10,7 +10,8 @@ class homeController extends Controller
     public function index() {
         $dados = array();
 
-        $products = new Products();
+        $products    = new Products();
+        $categories  = new Categories();
 
         $currentPage = 1;
         $offset      = 0;
@@ -22,10 +23,11 @@ class homeController extends Controller
 
         $offset = ($currentPage * $limit) - $limit;
 
-        $dados['list']        = $products->getList($offset, $limit);
-        $dados['totalItems']  = $products->getTotal();
-        $dados['numPages']    = ceil($dados['totalItems'] / $limit);
-        $dados['currentPage'] = $currentPage;
+        $dados['list']            = $products->getList($offset, $limit);
+        $dados['totalItems']      = $products->getTotal();
+        $dados['numPages']        = ceil($dados['totalItems'] / $limit);
+        $dados['currentPage']     = $currentPage;
+        $dados['categories']      = $categories->getList();
 
         $this->loadTemplate('home', $dados);
     }
