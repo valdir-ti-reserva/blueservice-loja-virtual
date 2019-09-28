@@ -27,6 +27,43 @@ class Categories extends Model
       return $array;
   }
 
+  //Buscando a arvore da categoria
+  public function getCategoryTree($id){
+
+    $array     = array();
+    $haveChild = true;
+
+    while($haveChild){
+
+      $sql = "SELECT * FROM categories WHERE id = :id";
+      $sql = $this->db->prepare($sql);
+      $sql->bindValue(":id", $id);
+      $sql->execute();
+      if($sql->rowCount()){
+
+        $sql     = $sql->fetch();
+        $array[] = $sql;
+
+        if(!empty($sql['sub'])){
+
+          $id = $sql['sub'];
+
+        }else{
+
+          $haveChild = false;
+
+        }
+
+      }
+
+    }
+
+    $array = array_reverse($array);
+
+    return $array;
+
+  }
+
 
   //Organizando o array as subcategorias até que fiquem somente as categorias "PAI"
   private function organizeCategory(&$array){//Utilizando ponteiro para diretamente alterar o array por parametro

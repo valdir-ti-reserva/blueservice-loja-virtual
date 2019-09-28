@@ -98,7 +98,17 @@
 
 					        </ul>
 					      </li>
-						<li><a href="#">Categoria X</a></li>
+
+                <?php if(isset($viewData['categories_filter'])):?>
+
+                  <?php foreach($viewData['categories_filter'] as $cf):?>
+
+                    <li><a href="<?=BASE_URL?>categories/enter/<?=$cf['id']?>"><?=$cf['name']?></a></li>
+
+                  <?php endforeach?>
+
+                <?php endif?>
+
 					</ul>
 				</div>
 			</nav>
