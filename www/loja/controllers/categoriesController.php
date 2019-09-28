@@ -7,41 +7,57 @@ class categoriesController extends Controller
         parent::__construct();
     }
 
-    // public function index() {
-    //     $dados = array();
-
-    //     $products    = new Products();
-    //     $categories  = new Categories();
-
-    //     $currentPage = 1;
-    //     $offset      = 0;
-    //     $limit       = 3;
-
-    //     if(!empty($_GET['p'])){
-    //       $currentPage = $_GET['p'];
-    //     }
-
-    //     $offset = ($currentPage * $limit) - $limit;
-
-    //     $dados['list']            = $products->getList($offset, $limit);
-    //     $dados['totalItems']      = $products->getTotal();
-    //     $dados['numPages']        = ceil($dados['totalItems'] / $limit);
-    //     $dados['currentPage']     = $currentPage;
-    //     $dados['categories']      = $categories->getList();
-
-    //     $this->loadTemplate('home', $dados);
-    // }
+    public function index() {
+      header("Location: ".BASE_URL);
+    }
 
     public function enter($id){
 
-      $dados = array();
+      $dados      = array();
 
+      $products   = new Products();
       $categories = new Categories();
 
-      $dados['categories_filter'] = $categories->getCategoryTree($id);
-      $dados['categories']        = $categories->getList();
 
-      $this->loadTemplate('categories', $dados);
+      $dados['category_name']   = $categories->getCategoryName($id);
+
+      if(!empty($dados['category_name'])){
+
+        $currentPage = 1;
+        $offset      = 0;
+        $limit       = 3;
+
+        if(!empty($_GET['p'])){
+          $currentPage = $_GET['p'];
+        }
+
+        $offset = ($currentPage * $limit) - $limit;
+
+        //Filtrando os produtos por categoria
+        $filters = array('category'=>$id);
+
+        $dados['categories_filter'] = $categories->getCategoryTree($id);
+
+        $dados['list']            = $products->getList($offset, $limit, $filters);
+        $dados['totalItems']      = $products->getTotal($filters);
+        $dados['numPages']        = ceil($dados['totalItems'] / $limit);
+        $dados['currentPage']     = $currentPage;
+        $dados['id_category']     = $id;
+        $dados['categories']      = $categories->getList();
+
+        $this->loadTemplate('categories', $dados);
+
+      }else{
+
+        header("Location: ".BASE_URL);
+
+      }
+
+
+
+
+
+
     }
 
 }

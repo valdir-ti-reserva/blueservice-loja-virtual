@@ -64,6 +64,23 @@ class Categories extends Model
 
   }
 
+  public function getCategoryName($id){
+
+    $sql = "SELECT name FROM categories WHERE id = :id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
+    if($sql->rowCount() > 0){
+
+      $sql = $sql->fetch();
+      return $sql['name'];
+
+    }
+
+
+  }
+
 
   //Organizando o array as subcategorias até que fiquem somente as categorias "PAI"
   private function organizeCategory(&$array){//Utilizando ponteiro para diretamente alterar o array por parametro
