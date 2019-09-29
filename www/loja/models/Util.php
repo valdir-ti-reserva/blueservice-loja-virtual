@@ -47,6 +47,12 @@ class Util extends Model{
 
     }
 
+    if(!empty($filters['searchTerm'])){
+
+      $where[] = "name LIKE :searchTerm";
+
+    }
+
     return $where;
 
   }
@@ -63,6 +69,10 @@ class Util extends Model{
 
     if(!empty($filters['slider1'])){
       $sql->bindValue(":slider1", $filters['slider1']);
+    }
+
+    if(!empty($filters['searchTerm'])){
+      $sql->bindValue(":searchTerm", '%'.$filters['searchTerm'].'%');
     }
 
   }

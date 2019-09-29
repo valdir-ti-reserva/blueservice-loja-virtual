@@ -12,9 +12,19 @@ class searchController extends Controller
 
         $products    = new Products();
         $categories  = new Categories();
+        $f           = new Filters();
 
         if(!empty($_GET['s'])){
-          $searchTerm = $_GET['s'];
+          $searchTerm   = $_GET['s'];
+          $categoryTerm = $_GET['category'];
+
+          $filters      = array();
+          if(!empty($_GET['filter']) && is_array($_GET['filter'])){
+            $filters = $_GET['filter'];
+          }
+
+          $filters['searchTerm'] = $searchTerm;
+          $filters['category']   = $categoryTerm;
 
           $currentPage = 1;
           $offset      = 0;
@@ -26,20 +36,27 @@ class searchController extends Controller
 
           $offset = ($currentPage * $limit) - $limit;
 
-          $dados['list']            = $products->getList($offset, $limit);
-          $dados['totalItems']      = $products->getTotal();
-          $dados['numPages']        = ceil($dados['totalItems'] / $limit);
-          $dados['currentPage']     = $currentPage;
-          $dados['categories']      = $categories->getList();
-          $dados['search_term']     = $searchTerm;
+          $dados['list']             = $products->getList($offset, $limit, $filters);
+          $dados['totalItems']       = $products->getTotal($filters);
+          $dados['numPages']         = ceil($dados['totalItems'] / $limit);
+          $dados['currentPage']      = $currentPage;
+
+          $dados['categories']       = $categories->getList();
+
+          $dados['filters']          = $f->getFilters($filters);
+          $dados['filters_selected'] = $filters;
+
+          $dados['searchTerm']       = $searchTerm;
+          $dados['category']         = $categoryTerm;
 
           $this->loadTemplate('search', $dados);
 
-        }else{
+      }else{
 
-          header("Location: ".BASE_URL);
+        header("Location: ".BASE_URL);
 
-        }
+      }
+
     }
 
 }

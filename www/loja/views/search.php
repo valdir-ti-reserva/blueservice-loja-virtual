@@ -1,4 +1,4 @@
-<h1>Você está procurando por: "<?=$search_term?>"</h1>
+<h1>Você está procurando por: "<?=$viewData['searchTerm']?>"</h1>
 <div class="row">
 
   <?php

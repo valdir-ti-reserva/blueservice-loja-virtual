@@ -6,11 +6,12 @@ class Filters extends Model{
   public function getFilters($filters){
 
     $array = array(
-      'brands'    =>array(),
-      'slider0'   =>0,
-      'slider1'   =>0,
-      'maxSlider' =>1000,
-      'stars'     =>array(
+      'searchyTerm' => '',
+      'brands'      =>array(),
+      'slider0'     =>0,
+      'slider1'     =>0,
+      'maxSlider'   =>1000,
+      'stars'       =>array(
         '0'=>0,
         '1'=>0,
         '2'=>0,
@@ -18,9 +19,13 @@ class Filters extends Model{
         '4'=>0,
         '5'=>0
       ),
-      'sale'      =>0,
-      'options'   =>array()
+      'sale'        =>0,
+      'options'     =>array()
     );
+
+    if(isset($filters['searchTerm'])){
+      $array['searchTerm'] = $filters['searchTerm'];
+    }
 
     $brands          = new Brands();
     $products        = new Products() ;

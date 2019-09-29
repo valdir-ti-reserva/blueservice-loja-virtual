@@ -46,20 +46,22 @@
 						<div class="head_email">contato@<span>loja2.com.br</span></div>
 
 						<div class="search_area">
+
 							<form method="GET" action="<?=BASE_URL?>search">
-								<input type="text" name="s" required placeholder="Procure um item" autocomplete="off"/>
+ 								<input type="text" name="s" required placeholder="Procure um item" autocomplete="off" value="<?=(!empty($viewData['searchTerm'])) ? $viewData['searchTerm'] : ''?>"/>
 								<select name="category">
                   <option value="">Todas as Categorias</option>
 
                   <?php foreach($viewData['categories'] as $cat):?>
 
-                    <option value="<?=$cat['id']?>"><?=$cat['name']?></option>
+                    <option value="<?=$cat['id']?>" <?=(!empty($viewData['category']) && $viewData['category'] == $cat['id']) ? "selected" : ''?> ><?=$cat['name']?></option>
 
                     <?php
                       if(count($cat['subs']) > 0){
                         $this->loadView('search_subcategory', array(
-                          'subs'  => $cat['subs'],
-                          'level' => 1
+                          'subs'     => $cat['subs'],
+                          'level'    => 1,
+                          'category' => $viewData['category']
                         ));
 
                       }
@@ -68,9 +70,11 @@
                   <?php endforeach ?>
 
 								</select>
-								<input type="submit" value=""/>
-						    </form>
-						</div>
+                <input type="submit" value=""/>
+              </form>
+
+            </div>
+
 					</div>
 					<div class="col-sm-3">
 						<a href="<?php echo BASE_URL; ?>cart">
