@@ -76,11 +76,11 @@
 						<a href="<?php echo BASE_URL; ?>cart">
 							<div class="cartarea">
 								<div class="carticon">
-									<div class="cartqt">9</div>
+									<div class="cartqt">0</div>
 								</div>
 								<div class="carttotal">
 									Seu Carrinho:<br/>
-									<span>R$ 999,99</span>
+									<span>R$ 000,00</span>
 								</div>
 							</div>
 						</a>
@@ -147,9 +147,18 @@
                 <div class="filterbox">
                   <div class="filtertitle">Marcas</div>
                   <div class="filtercontent">
+                    <?php if(!empty($viewData['filters']['brands'])):?>
+                      <?php foreach($viewData['filters']['brands'] as $brand):?>
 
-                    ...
+                      <?php if($brand['total'] > 0):?>
+                        <div class="filteritem">
+                          <input type="checkbox" name="filter[brand][]" value="<?=$brand['id']?>" id="filter_brand<?=$brand['id']?>" />
+                          <label for="filter_brand"><?=$brand['name']?></label><span style="float:right;">(<?=$brand['total']?>)</span>
+                        </div>
+                      <?php endif ?>
 
+                      <?php endforeach ?>
+                    <?php endif?>
                   </div>
                 </div>
 
@@ -157,10 +166,7 @@
                   <div class="filtertitle">Preço</div>
                   <div class="filtercontent">
 
-                    <p>
-                      <input type="text" id="amount" readonly>
-                    </p>
-
+                    <p><input type="text" id="amount" readonly></p>
                     <div id="slider-range"></div>
 
                   </div>
@@ -168,27 +174,87 @@
 
                 <div class="filterbox">
                   <div class="filtertitle">Estrelas</div>
-                  <div class="filtercontent">
+                    <div class="filtercontent">
 
-                    ...
+                      <div class="filteritem">
+                          <input type="checkbox" name="filter[star][]" value="0" id="filter_star0" />
+                            <label for="filter_star0">
+                              (Sem estrela)
+                            </label>
+                            <span style="float:right;">(<?=$viewData['filters']['stars']['0']?>)</span>
+                      </div>
 
-                  </div>
+                      <div class="filteritem">
+                          <input type="checkbox" name="filter[star][]" value="1" id="filter_star1" />
+                            <label for="filter_star1">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                            </label>
+                            <span style="float:right;">(<?=$viewData['filters']['stars']['1']?>)</span>
+                      </div>
+
+                      <div class="filteritem">
+                          <input type="checkbox" name="filter[star][]" value="2" id="filter_star2" />
+                            <label for="filter_star2">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                            </label>
+                            <span style="float:right;">(<?=$viewData['filters']['stars']['2']?>)</span>
+                      </div>
+
+                      <div class="filteritem">
+                          <input type="checkbox" name="filter[star][]" value="3" id="filter_star3" />
+                            <label for="filter_star3">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                            </label>
+                            <span style="float:right;">(<?=$viewData['filters']['stars']['3']?>)</span>
+                      </div>
+
+                      <div class="filteritem">
+                          <input type="checkbox" name="filter[star][]" value="4" id="filter_star4" />
+                            <label for="filter_star4">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                            </label>
+                            <span style="float:right;">(<?=$viewData['filters']['stars']['4']?>)</span>
+                      </div>
+
+                      <div class="filteritem">
+                          <input type="checkbox" name="filter[star][]" value="5" id="filter_star5" />
+                            <label for="filter_star5">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                              <img src="<?=BASE_URL?>assets/images/star.png" border="0" height="13px">
+                            </label>
+                            <span style="float:right;">(<?=$viewData['filters']['stars']['5']?>)</span>
+                      </div>
+
+                    </div>
                 </div>
 
                 <div class="filterbox">
                   <div class="filtertitle">Promoção</div>
-                  <div class="filtercontent">
+                    <div class="filtercontent">
 
-                    ...
+                      <div class="filteritem">
+                          <input type="checkbox" name="filter[sale]" id="filter_sale">
+                          <label for="filter_sale">Em promoção</label>
+                          <span style="float:right;">(<?=$viewData['filters']['sale']?>)</span>
+                      </div>
 
-                  </div>
+                    </div>
                 </div>
 
                 <div class="filterbox">
                   <div class="filtertitle">Opções</div>
                   <div class="filtercontent">
 
-                    ...
+                    <span style="float:right;">(<?=$viewData['filters']['options']?>)</span>
 
                   </div>
                 </div>
@@ -312,10 +378,10 @@
 					</div>
 	    		</div>
 	    	</div>
-	    </footer>
+      </footer>
     <script type="text/javascript">
       var BASE_URL  = '<?php echo BASE_URL; ?>';
-      var maxSlider = <?=$viewData['maxSlider']?>;
+      var maxSlider = <?=$viewData['filters']['maxSlider']?>;
     </script>
     <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery-ui.min.js"></script>

@@ -7,11 +7,8 @@ class Products extends Model
     {
         $array = array();
 
-        $where = array('1=1');
-
-        if(!empty($filters['category'])){
-          $where[] = "id_category = :id_category";
-        }
+        $util  = new Util();
+        $where = $util->buildWhere($filters);
 
         $sql = "SELECT *,
                   (select brands.name from brands where brands.id = a.id_brand) as brand_name,
@@ -21,9 +18,7 @@ class Products extends Model
                           LIMIT $offset, $limit";
         $sql = $this->db->prepare($sql);
 
-        if(!empty($filters['category'])){
-          $sql->bindValue(":id_category", $filters['category']);
-        }
+        $util->bindWhere($filters, $sql);
 
         $sql->execute();
         if($sql->rowCount() > 0){
@@ -41,6 +36,157 @@ class Products extends Model
         return $array;
 
     }
+
+    public function getMaxPrice($filters = array()){
+
+      $util  = new Util();
+      $where = $util->buildWhere($filters);
+
+      $sql = "SELECT price FROM products WHERE ".implode(' AND ', $where)." ORDER BY price DESC LIMIT 1";
+      $sql = $this->db->prepare($sql);
+      $util->bindWhere($filters, $sql);
+
+      $sql->execute();
+      if($sql->rowCount() > 0){
+
+          $sql = $sql->fetch();
+          return $sql['price'];
+
+      }else{
+
+          return '0';
+      }
+
+    }
+
+
+    public function getListOfStars($filters = array()){
+      $array = array();
+      $util  = new Util();
+      $where = $util->buildWhere($filters);
+
+      $sql = "SELECT
+                rating,
+                  COUNT(id) AS c
+                    FROM products
+                      WHERE ".implode(' AND ', $where)."
+                        GROUP BY rating";
+      $sql = $this->db->prepare($sql);
+
+      $util->bindWhere($filters, $sql);
+      $sql->execute();
+
+      if($sql->rowCount() > 0){
+        $array = $sql->fetchAll();
+      }
+
+      return $array;
+    }
+
+    //Itens em promoção
+    public function getSaleCount($filters = array()){
+
+      $util  = new Util();
+      $where = $util->buildWhere($filters);
+
+      $where[] = 'sale="1"';
+
+      $sql = "SELECT COUNT(*) AS c
+                FROM products
+                  WHERE ".implode(' AND ', $where);
+      $sql = $this->db->prepare($sql);
+      $util->bindWhere($filters, $sql);
+
+      $sql->execute();
+      if($sql->rowCount() > 0){
+
+        $sql = $sql->fetch();
+        return $sql['c'];
+
+      }else{
+
+        return '0';
+      }
+
+    }
+
+    //Opções disponíveis
+    public function getAvailableOptions($filters = array()){
+      $groups = array();
+      $ids    = array();
+
+      $util  = new Util();
+      $where = $util->buildWhere($filters);
+
+      $sql = "SELECT id, options
+                FROM products
+                  WHERE ".implode(' AND ', $where)."
+              ";
+      $sql = $this->db->prepare($sql);
+
+      $util->bindWhere($filters, $sql);
+
+      $sql->execute();
+
+      if($sql->rowCount() > 0){
+
+        foreach($sql->fetchAll() as $product){
+          $ops   = explode(",", $product['options']);
+          $ids[] = $product['id'];
+
+          foreach($ops as $op){
+
+            if(!in_array($op, $groups)){
+              $groups[] = $op;
+            }
+
+          }
+        }
+      }
+
+      $options = $this->getAvailableValuesFromOptions($groups, $ids);
+
+      return $options;
+
+    }
+
+    private function getAvailableValuesFromOptions($groups, $ids){
+      $array = array();
+
+      $options = new Options();
+
+      foreach($groups as $op){
+        $array[$op] = array(
+          'name'=>$options->getName($op),
+          'options'=>array()
+        );
+      }
+
+      $sql = "SELECT
+                p_value,
+                  id_option,
+                    COUNT(id_option) AS c
+                      FROM products_options
+                        WHERE
+                          id_option  IN('".implode(',', $groups)."')
+                            AND id_product IN('".implode(',', $ids)."')
+                              GROUP BY p_value
+                                ORDER BY id_option";
+
+
+      $sql = $this->db->query($sql);
+
+      if($sql->rowCount() > 0){
+        foreach($sql->fetchAll() as $ops){
+
+          $array[$ops['id_option']]['options'][] = array('value'=>$ops['p_value'],'count'=>$ops['c']);
+
+        }
+      }
+
+      // return $array;
+    }
+
 
     public function getImagesById($id)
     {
@@ -61,11 +207,8 @@ class Products extends Model
     public function getTotal($filters = array())
     {
 
-      $where = array('1=1');
-
-      if(!empty($filters['category'])){
-        $where[] = "id_category = :id_category";
-      }
+      $util  = new Util();
+      $where = $util->buildWhere($filters);
 
       $sql = "SELECT
                 COUNT(*) AS c
@@ -73,9 +216,7 @@ class Products extends Model
                     WHERE ".(implode(' AND ', $where))."";
       $sql = $this->db->prepare($sql);
 
-      if(!empty($filters['category'])){
-        $sql->bindValue(":id_category", $filters['category']);
-      }
+      $util->bindWhere($filters, $sql);
 
       $sql->execute();
       $sql = $sql->fetch();
