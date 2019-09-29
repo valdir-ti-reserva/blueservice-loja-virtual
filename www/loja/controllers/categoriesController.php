@@ -17,7 +17,7 @@ class categoriesController extends Controller
 
       $products   = new Products();
       $categories = new Categories();
-
+      $f          = new Filters();
 
       $dados['category_name']   = $categories->getCategoryName($id);
 
@@ -38,12 +38,15 @@ class categoriesController extends Controller
 
         $dados['categories_filter'] = $categories->getCategoryTree($id);
 
-        $dados['list']            = $products->getList($offset, $limit, $filters);
-        $dados['totalItems']      = $products->getTotal($filters);
-        $dados['numPages']        = ceil($dados['totalItems'] / $limit);
-        $dados['currentPage']     = $currentPage;
-        $dados['id_category']     = $id;
-        $dados['categories']      = $categories->getList();
+        $dados['list']             = $products->getList($offset, $limit, $filters);
+        $dados['totalItems']       = $products->getTotal($filters);
+        $dados['numPages']         = ceil($dados['totalItems'] / $limit);
+        $dados['currentPage']      = $currentPage;
+        $dados['id_category']      = $id;
+        $dados['categories']       = $categories->getList();
+        $dados['filters']          = $f->getFilters($filters);
+        $dados['filters_selected'] = $filters;
+        $dados['sidebar']          = true;
 
         $this->loadTemplate('categories', $dados);
 

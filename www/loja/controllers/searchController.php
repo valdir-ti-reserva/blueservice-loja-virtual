@@ -49,6 +49,8 @@ class searchController extends Controller
           $dados['searchTerm']       = $searchTerm;
           $dados['category']         = $category;
 
+          $dados['sidebar']          = true;
+
           $this->loadTemplate('search', $dados);
 
       }else{

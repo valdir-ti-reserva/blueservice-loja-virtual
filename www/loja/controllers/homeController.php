@@ -36,6 +36,7 @@ class homeController extends Controller
         $dados['categories']       = $categories->getList();
         $dados['filters']          = $f->getFilters($filters);
         $dados['filters_selected'] = $filters;
+        $dados['sidebar']          = true;
 
         $this->loadTemplate('home', $dados);
     }
