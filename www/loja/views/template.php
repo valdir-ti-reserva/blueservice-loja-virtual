@@ -150,6 +150,9 @@
 
                 <form action="" method="GET">
 
+                      <input type="hidden" name="s" value="<?=$viewData['searchTerm']?>"/>
+                      <input type="hidden" name="category" value="<?=$viewData['category']?>"/>
+
                       <div class="filterbox">
                         <div class="filtertitle">Marcas</div>
                         <div class="filtercontent">
