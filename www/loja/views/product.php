@@ -1,6 +1,31 @@
 <div class="row">
-  <div class="col-sm-4">Fotos</div>
-  <div class="col-sm-8">
+
+  <div class="col-sm-5">
+
+    <div class="mainPhotho">
+
+      <img src="<?=BASE_URL?>media/products/<?=$viewData['product_images'][0][0]?>" alt="">
+
+    </div>
+
+    <div class="gallery">
+
+      <?php foreach($viewData['product_images'] as $img):?>
+
+        <div class="photoItem">
+
+          <img src="<?=BASE_URL?>/media/products/<?=$img['url']?>" alt="">
+
+        </div>
+
+      <?php endforeach ?>
+
+    </div>
+
+  </div>
+
+  <div class="col-sm-7">
+
     <h3><?=$viewData['product_info']['name']?></h3>
     <small><?=$viewData['product_info']['brand_name']?></small><br>
 
@@ -18,8 +43,8 @@
     <p><?=$viewData['product_info']['description']?></p>
     <hr>
 
-      De: <span class="price_from">R$ <?=number_format($viewData['product_info']['price_from'], 2)?></span>
-      Por: <span class="original_price">R$ <?=number_format($viewData['product_info']['price'], 2)?></span>
+    De: <span class="price_from">R$ <?=number_format($viewData['product_info']['price_from'], 2)?></span><br>
+    Por: <span class="original_price">R$ <?=number_format($viewData['product_info']['price'], 2)?></span>
 
       <form action="POST" class="addToCartForm">
 
@@ -29,4 +54,5 @@
       </form>
 
   </div>
+
 </div>

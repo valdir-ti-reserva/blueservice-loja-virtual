@@ -28,7 +28,7 @@ $(function(){
   $('.addToCartForm button').on('click', function(e){
     e.preventDefault();
 
-    var qt = parseInt($('.addToCartQt').val());
+    var qt     = parseInt($('.addToCartQt').val());
     var action = $(this).attr('data-action');
 
     if(action == 'decrease'){
@@ -40,6 +40,15 @@ $(function(){
     }
 
     $('.addToCartQt').val(qt);
+
+  });
+
+
+  $('.photoItem').on('click', function(){
+
+    var url = $(this).find('img').attr('src');
+
+    $('.mainPhotho').find('img').attr('src', url);
 
   });
 

@@ -21,11 +21,13 @@ class productController extends Controller
         $f           = new Filters();
         $filters     = array();
 
-        $info = $products->getProductInfo($id);
+        $info        = $products->getProductInfo($id);
+        $info_images = $products->getImagesById($id);
 
         if(count($info) > 0 ){
 
           $dados['product_info']     = $info;
+          $dados['product_images']   = $info_images;
           $dados['categories']       = $categories->getList();
 
           $dados['filters']          = $f->getFilters($filters);
