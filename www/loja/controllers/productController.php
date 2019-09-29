@@ -22,12 +22,14 @@ class productController extends Controller
         $filters     = array();
 
         $info        = $products->getProductInfo($id);
-        $info_images = $products->getImagesById($id);
 
         if(count($info) > 0 ){
 
           $dados['product_info']     = $info;
-          $dados['product_images']   = $info_images;
+          $dados['product_images']   = $products->getImagesById($id);
+          $dados['product_options']  = $products->getOptionsByProductId($id);
+          $dados['product_rates']    = $products->getRates($id, 5);
+
           $dados['categories']       = $categories->getList();
 
           $dados['filters']          = $f->getFilters($filters);

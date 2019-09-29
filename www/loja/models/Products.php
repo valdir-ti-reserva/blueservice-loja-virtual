@@ -227,6 +227,63 @@ class Products extends Model
       return $sql['c'];
     }
 
+    public function getOptionsByProductId($id){
+      $options = array();
+
+      //1 - Recuperar os nomes da opções
+      $sql = "SELECT options FROM products WHERE id=:id";
+      $sql = $this->db->prepare($sql);
+      $sql->bindValue(":id", $id);
+      $sql->execute();
+
+      if($sql->rowCount() > 0){
+
+        $options = $sql->fetch();
+        $options = $options['options'];
+
+        if(!empty($options)){
+          $sql = "SELECT * FROM options WHERE id IN(".$options.")";
+          $sql = $this->db->query($sql);
+          $options = $sql->fetchAll();
+        }
+
+        //2 - Receber os valores das opções
+        $sql = "SELECT * FROM products_options WHERE id_product=:id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+        $optionsValues = array();
+        if($sql->rowCount() > 0){
+
+          foreach($sql->fetchAll() as $op){
+
+            $optionsValues[$op['id_option']] = $op['p_value'];
+
+          }
+
+        }
+
+        //3 - Juntar os dois arrays
+        foreach($options as $k => $op){
+
+          if(isset($optionsValues[$op['id']])){
+
+            $options[$k]['value'] = $optionsValues[$op['id']];
+
+          }else{
+
+            $options[$k]['value'] = '';
+
+          }
+
+        }
+
+      }
+
+      return $options;
+    }
+
     public function getProductInfo($id){
       $array = array();
 
@@ -248,6 +305,16 @@ class Products extends Model
 
       }
 
+
+      return $array;
+    }
+
+    public function getRates($id, $qtd){
+
+      $array = array();
+
+      $rates = new Rates();
+      $array = $rates->getRates($id, $qtd);
 
       return $array;
     }

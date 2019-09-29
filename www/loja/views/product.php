@@ -51,7 +51,46 @@
         <button data-action="decrease">-</button><input type="text" name="qt" value="1" class="addToCartQt" disabled><button data-action="increase">+</button>
 
         <input type="submit" value="Adicionar ao carrinho" class="addToCartSubmit">
+
       </form>
+
+  </div>
+
+</div>
+<br>
+<div class="row">
+
+
+  <div class="col-sm-6">
+
+    <h2>Especificações</h2>
+
+    <?php foreach($viewData['product_options'] as $po):?>
+      <strong><?=$po['name']?>: </strong><span><?=$po['value']?></span><br>
+    <?php endforeach?>
+
+  </div>
+
+  <div class="col-sm-6">
+
+    <h2>Reviews</h2>
+
+    <?php foreach($viewData['product_rates'] as $po):?>
+
+      <strong><?=$po['user_name']?></strong>
+
+      <?php for($q=0;$q<intval($po['points']);$q++):?>
+
+        <img src="<?=BASE_URL?>/assets/images/star.png" alt="" height="15px">
+
+      <?php endfor?>
+
+      <br>
+
+      "<?=$po['comment']?>"
+      <hr>
+
+    <?php endforeach?>
 
   </div>
 
