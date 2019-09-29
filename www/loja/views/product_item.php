@@ -1,6 +1,6 @@
 <div class="product_item">
 
-    <a href="#">
+    <a href="<?=BASE_URL?>product/open/<?=$id?>">
 
       <div class="product_tags">
 

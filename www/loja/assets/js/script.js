@@ -25,4 +25,22 @@ $(function(){
 
   });
 
+  $('.addToCartForm button').on('click', function(e){
+    e.preventDefault();
+
+    var qt = parseInt($('.addToCartQt').val());
+    var action = $(this).attr('data-action');
+
+    if(action == 'decrease'){
+      if(qt-1 >= 1){
+        qt = qt - 1;
+      }
+    }else if(action == 'increase'){
+      qt = qt + 1;
+    }
+
+    $('.addToCartQt').val(qt);
+
+  });
+
 });

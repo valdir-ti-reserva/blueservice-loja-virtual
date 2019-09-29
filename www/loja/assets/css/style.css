@@ -403,3 +403,49 @@ footer h3 {
 .filteritem label{
   font-weight: normal;
 }
+
+.original_price{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.price_from{
+  font-size: 14px;
+  color: #ccc;
+}
+
+.addToCartForm{
+  margin-top: 25px;
+}
+
+.addToCartForm button{
+  height: 35px;
+  text-align: center;
+  border: 1px solid #ccc;
+  outline: 0;
+  background: #fff;
+  font-weight: bold;
+  width: 30px;
+  float: left;
+}
+
+.addToCartQt{
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  border: 1px solid #ccc;
+  outline: 0;
+  float: left;
+}
+
+.addToCartSubmit{
+  background: #59b210;
+  height: 35px;
+  float: left;
+  margin-left: 10px;
+  color: #fff;
+  border-radius: 3px;
+  border: 1px solid #59b210;
+  font-weight: bold;
+  padding: 0 20px;
+}
