@@ -190,6 +190,23 @@ class Products extends Model
       // return $array;
     }
 
+    public function getInfo($id){
+      $array = array();
+
+      $sql = "SELECT name, price FROM products  WHERE id=:id";
+      $sql = $this->db->prepare($sql);
+      $sql->bindValue(":id", $id);
+      $sql->execute();
+
+      if($sql->rowCount() > 0){
+        $array = $sql->fetch();
+        $images = current($this->getImagesById($id));
+        $array['image'] = $images['url'];
+      }
+
+      return $array;
+    }
+
 
     public function getImagesById($id)
     {

@@ -12,6 +12,7 @@ class searchController extends Controller
 
         $products    = new Products();
         $categories  = new Categories();
+        $cart        = new Cart();
         $f           = new Filters();
 
         if(!empty($_GET['s'])){
@@ -50,6 +51,18 @@ class searchController extends Controller
           $dados['category']         = $category;
 
           $dados['sidebar']          = true;
+
+          if(isset($_SESSION['cart'])){
+            $qt = 0;
+            foreach($_SESSION['cart'] as $qtd){
+              $qt += intval($qtd);
+            }
+            $dados['cart_qt']        = $qt;
+          }else{
+            $dados['cart_qt']        = 0;
+          }
+
+          $dados['cart_subtotal']   = $cart->getSubtotal();
 
           $this->loadTemplate('search', $dados);
 

@@ -46,7 +46,10 @@
     De: <span class="price_from">R$ <?=number_format($viewData['product_info']['price_from'], 2)?></span><br>
     Por: <span class="original_price">R$ <?=number_format($viewData['product_info']['price'], 2)?></span>
 
-      <form action="POST" class="addToCartForm">
+      <form method="POST" class="addToCartForm" action="<?=BASE_URL?>cart/add">
+
+        <input type="hidden" name="id_product" value="<?=$viewData['product_info']['id']?>">
+        <input type="hidden" name="qt_product" value="1">
 
         <button data-action="decrease">-</button><input type="text" name="qt" value="1" class="addToCartQt" disabled><button data-action="increase">+</button>
 

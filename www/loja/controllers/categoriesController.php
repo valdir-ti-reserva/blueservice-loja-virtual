@@ -17,6 +17,7 @@ class categoriesController extends Controller
 
       $products   = new Products();
       $categories = new Categories();
+      $cart       = new Cart();
       $f          = new Filters();
 
       $dados['category_name']   = $categories->getCategoryName($id);
@@ -47,6 +48,18 @@ class categoriesController extends Controller
         $dados['filters']          = $f->getFilters($filters);
         $dados['filters_selected'] = $filters;
         $dados['sidebar']          = true;
+
+        if(isset($_SESSION['cart'])){
+          $qt = 0;
+          foreach($_SESSION['cart'] as $qtd){
+            $qt += intval($qtd);
+          }
+          $dados['cart_qt']        = $qt;
+        }else{
+          $dados['cart_qt']        = 0;
+        }
+
+        $dados['cart_subtotal']   = $cart->getSubtotal();
 
         $this->loadTemplate('categories', $dados);
 
