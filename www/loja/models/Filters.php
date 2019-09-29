@@ -6,7 +6,7 @@ class Filters extends Model{
   public function getFilters($filters){
 
     $array = array(
-      'searchyTerm' => '',
+      'searchTerm' => '',
       'brands'      =>array(),
       'slider0'     =>0,
       'slider1'     =>0,

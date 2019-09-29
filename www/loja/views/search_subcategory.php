@@ -1,6 +1,6 @@
 <?php foreach($subs as $sub): ?>
 
-  <option value="<?=$sub['id']?>" <?=($category==$sub['id']) ? "selected" : ''?>>
+  <option value="<?=$sub['id']?>" <?=($category==$sub['id']) ? 'selected="selected"': ''?> >
     <?php
         for($q=0;$q<$level;$q++) echo '-- ';
         echo $sub['name'];
@@ -12,7 +12,7 @@
       $this->loadView('search_subcategory', array(
         'subs'     => $sub['subs'],
         'level'    => $level + 1,
-        'category' => 'category'
+        'category' => $category
       ));
     }
   ?>

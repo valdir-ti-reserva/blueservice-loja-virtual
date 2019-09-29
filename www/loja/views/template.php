@@ -54,7 +54,7 @@
 
                   <?php foreach($viewData['categories'] as $cat):?>
 
-                    <option value="<?=$cat['id']?>" <?=(!empty($viewData['category']) && $viewData['category'] == $cat['id']) ? "selected" : ''?> ><?=$cat['name']?></option>
+                    <option value="<?=$cat['id']?>" <?=($viewData['category'] == $cat['id']) ? 'selected="selected"': ''?> ><?=$cat['name']?></option>
 
                     <?php
                       if(count($cat['subs']) > 0){

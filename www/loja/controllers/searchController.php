@@ -16,7 +16,7 @@ class searchController extends Controller
 
         if(!empty($_GET['s'])){
           $searchTerm   = $_GET['s'];
-          $categoryTerm = $_GET['category'];
+          $category     = $_GET['category'];
 
           $filters      = array();
           if(!empty($_GET['filter']) && is_array($_GET['filter'])){
@@ -24,7 +24,7 @@ class searchController extends Controller
           }
 
           $filters['searchTerm'] = $searchTerm;
-          $filters['category']   = $categoryTerm;
+          $filters['category']   = $category;
 
           $currentPage = 1;
           $offset      = 0;
@@ -47,13 +47,13 @@ class searchController extends Controller
           $dados['filters_selected'] = $filters;
 
           $dados['searchTerm']       = $searchTerm;
-          $dados['category']         = $categoryTerm;
+          $dados['category']         = $category;
 
           $this->loadTemplate('search', $dados);
 
       }else{
 
-        header("Location: ".BASE_URL);
+          header("Location: ".BASE_URL);
 
       }
 
