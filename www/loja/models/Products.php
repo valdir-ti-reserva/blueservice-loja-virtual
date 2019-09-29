@@ -42,7 +42,10 @@ class Products extends Model
       $util  = new Util();
       $where = $util->buildWhere($filters);
 
-      $sql = "SELECT price FROM products WHERE ".implode(' AND ', $where)." ORDER BY price DESC LIMIT 1";
+      $sql = "SELECT price
+                FROM products
+                    ORDER BY price DESC
+                      LIMIT 1";
       $sql = $this->db->prepare($sql);
       $util->bindWhere($filters, $sql);
 

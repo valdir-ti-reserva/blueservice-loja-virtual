@@ -168,6 +168,8 @@
                         <div class="filtertitle">Preço</div>
                         <div class="filtercontent">
 
+                          <input type="hidden" id="slider0" name="filter[slider0]" value="<?=$viewData['filters']['slider0']?>"/>
+                          <input type="hidden" id="slider1" name="filter[slider1]" value="<?=$viewData['filters']['slider1']?>"/>
                           <p><input type="text" id="amount" readonly></p>
                           <div id="slider-range"></div>
 
@@ -386,7 +388,7 @@
     <script type="text/javascript">
       var BASE_URL     = '<?php echo BASE_URL; ?>';
       var maxSlider    = <?=$viewData['filters']['maxSlider']?>;
-      var sliderValues = [0, maxSlider];
+      // var sliderValues = [0, maxSlider];
     </script>
     <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery-ui.min.js"></script>

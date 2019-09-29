@@ -29,6 +29,18 @@ class Util extends Model{
 
     }
 
+    if(!empty($filters['slider0'])){
+
+      $where[] = "price >= :slider0";
+
+    }
+
+    if(!empty($filters['slider1'])){
+
+      $where[] = "price <= :slider1";
+
+    }
+
     if(!empty($filters['options'])){
 
       $where[] = " id IN (select id_product from products_options where products_options.p_value IN('".implode("', '", $filters['options'])."'))";
@@ -43,6 +55,14 @@ class Util extends Model{
 
     if(!empty($filters['category'])){
       $sql->bindValue(":id_category", $filters['category']);
+    }
+
+    if(!empty($filters['slider0'])){
+      $sql->bindValue(":slider0", $filters['slider0']);
+    }
+
+    if(!empty($filters['slider1'])){
+      $sql->bindValue(":slider1", $filters['slider1']);
     }
 
   }
