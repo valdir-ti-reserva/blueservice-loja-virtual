@@ -33,7 +33,33 @@
   <?php endforeach?>
   <tr>
     <td colspan="3" align="right">Subtotal</td>
-    <td><strong>R$ <?=number_format($subtotal, 2, ',' ,'.')?></strong></td>
+    <td colspan="2"><strong>R$ <?=number_format($subtotal, 2, ',' ,'.')?></strong></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right">Frete</td>
+    <td colspan="2">
+      <?php if(isset($shipping['price'])):?>
+        R$ <?=$shipping['price']?> (<?=$shipping['date']?> dia<?=($shipping['date'] == 1)?'':'s'?>)
+      <?php else: ?>
+        <h4>Qual é o seu CEP?</h4>
+        <form action="" method="POST">
+          <input type="number" name="cep" style="float:left;height:35px;">
+          <input type="submit" value="Calcular" class="addToCartSubmit">
+        </form>
+      <?php endif?>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right">Total</td>
+    <td colspan="2">
+      <strong>R$
+        <?php
+          $frete = floatval(str_replace(',', '.', $shipping['price']));
+          $total = $subtotal + $frete;
+          echo number_format($total, 2, ',' ,'.');
+        ?>
+      </strong>
+    </td>
   </tr>
 
 

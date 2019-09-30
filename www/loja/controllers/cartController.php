@@ -11,6 +11,19 @@ class cartController extends Controller
         $dados    = array();
         $products = new Products();
         $cart     = new Cart();
+        $cep      = '';
+        $shipping = array();
+
+        if(!empty($_POST['cep'])){
+          $cep = intval($_POST['cep']);
+
+          $shipping = $cart->shippingCalculator($cep);
+          $_SESSION['shipping'] = $shipping;
+        }
+
+        if(!empty($_SESSION['shipping'])){
+          $shipping = $_SESSION['shipping'];
+        }
 
         if(!isset($_SESSION['cart']) || (isset($_SESSION['cart']) && count($_SESSION['cart']) == 0)){
           header("Location: ".BASE_URL);
@@ -29,7 +42,8 @@ class cartController extends Controller
           $dados['cart_qt'] = 0;
         }
 
-        $dados['cart_subtotal']   = $cart->getSubtotal();
+        $dados['shipping']      = $shipping;
+        $dados['cart_subtotal'] = $cart->getSubtotal();
 
 
         $this->loadTemplate('cart', $dados);
