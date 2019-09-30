@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 27/09/2019 às 02:17
+-- Tempo de geração: 30-Set-2019 às 11:42
 -- Versão do servidor: 8.0.17
--- Versão do PHP: 7.2.14
+-- versão do PHP: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `brands`
+-- Estrutura da tabela `brands`
 --
 
 CREATE TABLE `brands` (
@@ -34,7 +34,7 @@ CREATE TABLE `brands` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `brands`
+-- Extraindo dados da tabela `brands`
 --
 
 INSERT INTO `brands` (`id`, `name`) VALUES
@@ -44,7 +44,7 @@ INSERT INTO `brands` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `categories`
+-- Estrutura da tabela `categories`
 --
 
 CREATE TABLE `categories` (
@@ -54,7 +54,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `categories`
+-- Extraindo dados da tabela `categories`
 --
 
 INSERT INTO `categories` (`id`, `sub`, `name`) VALUES
@@ -63,7 +63,7 @@ INSERT INTO `categories` (`id`, `sub`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `coupons`
+-- Estrutura da tabela `coupons`
 --
 
 CREATE TABLE `coupons` (
@@ -76,7 +76,7 @@ CREATE TABLE `coupons` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `options`
+-- Estrutura da tabela `options`
 --
 
 CREATE TABLE `options` (
@@ -85,7 +85,7 @@ CREATE TABLE `options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `options`
+-- Extraindo dados da tabela `options`
 --
 
 INSERT INTO `options` (`id`, `name`) VALUES
@@ -97,7 +97,7 @@ INSERT INTO `options` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `pages`
+-- Estrutura da tabela `pages`
 --
 
 CREATE TABLE `pages` (
@@ -109,7 +109,7 @@ CREATE TABLE `pages` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `products`
+-- Estrutura da tabela `products`
 --
 
 CREATE TABLE `products` (
@@ -126,27 +126,32 @@ CREATE TABLE `products` (
   `sale` tinyint(1) NOT NULL,
   `bestseller` tinyint(1) NOT NULL,
   `new_product` tinyint(1) NOT NULL,
-  `options` varchar(200) DEFAULT NULL
+  `options` varchar(200) DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `length` float DEFAULT NULL,
+  `height` int(11) DEFAULT NULL,
+  `width` int(11) DEFAULT NULL,
+  `diameter` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `products`
+-- Extraindo dados da tabela `products`
 --
 
-INSERT INTO `products` (`id`, `id_category`, `id_brand`, `name`, `description`, `stock`, `price`, `price_from`, `rating`, `featured`, `sale`, `bestseller`, `new_product`, `options`) VALUES
-(1, 1, 1, 'Monitor 21\"', 'Descrição do monitor', 10, 499, 599, 0, 0, 1, 1, 0, NULL),
-(2, 1, 2, 'Monitor 18\"', 'Descrição do outro monitor', 10, 399, 499, 0, 0, 0, 0, 0, NULL),
-(3, 1, 1, 'Monitor 23\"', 'Descrição do outro monitor', 10, 399, 466, 0, 0, 1, 0, 0, NULL),
-(4, 2, 2, 'Monitor 19\"', 'Descrição do outro monitor', 10, 125, 0, 0, 0, 0, 0, 0, NULL),
-(5, 2, 1, 'Monitor 14\"', 'Descrição do outro monitor', 10, 500, 300, 0, 0, 0, 0, 1, NULL),
-(6, 2, 2, 'Monitor 20\"', 'Descrição do outro monitor', 10, 325, 300, 0, 0, 0, 1, 0, NULL),
-(7, 2, 1, 'Monitor 17\"', 'Descrição do outro monitor', 10, 315, 300, 0, 0, 0, 0, 1, NULL),
-(8, 2, 2, 'Monitor 19\"', 'Descrição do outro monitor', 10, 125, 300, 0, 0, 0, 0, 0, NULL);
+INSERT INTO `products` (`id`, `id_category`, `id_brand`, `name`, `description`, `stock`, `price`, `price_from`, `rating`, `featured`, `sale`, `bestseller`, `new_product`, `options`, `weight`, `length`, `height`, `width`, `diameter`) VALUES
+(1, 1, 1, 'Monitor 21\"', 'Descrição do monitor', 10, 499, 599, 0, 0, 1, 1, 0, '1,2,4', 0.9, 15, 20, 15, 20),
+(2, 1, 2, 'Monitor 18\"', 'Descrição do outro monitor', 10, 399, 499, 0, 0, 0, 0, 0, '1,2', 0.8, 15, 20, 15, 20),
+(3, 1, 1, 'Monitor 23\"', 'Descrição do outro monitor', 10, 399, 466, 0, 0, 1, 0, 0, '1,4', 0.7, 15, 20, 15, 20),
+(4, 2, 2, 'Monitor 19\"', 'Descrição do outro monitor', 10, 125, 0, 0, 0, 0, 0, 0, '2,4', 0.6, 15, 20, 15, 20),
+(5, 2, 1, 'Monitor 14\"', 'Descrição do outro monitor', 10, 500, 300, 0, 0, 0, 0, 1, '1,2', 0.3, 15, 20, 15, 20),
+(6, 2, 2, 'Monitor 20\"', 'Descrição do outro monitor', 10, 325, 300, 0, 0, 0, 1, 0, '4,2,1', 0.2, 15, 20, 15, 20),
+(7, 2, 1, 'Monitor 17\"', 'Descrição do outro monitor', 10, 315, 300, 0, 0, 0, 0, 1, '4,1', 0.4, 15, 20, 15, 20),
+(8, 2, 2, 'Monitor 19\"', 'Descrição do outro monitor', 10, 125, 300, 0, 0, 0, 0, 0, '1,2,4', 0.8, 15, 20, 15, 20);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `products_images`
+-- Estrutura da tabela `products_images`
 --
 
 CREATE TABLE `products_images` (
@@ -156,7 +161,7 @@ CREATE TABLE `products_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `products_images`
+-- Extraindo dados da tabela `products_images`
 --
 
 INSERT INTO `products_images` (`id`, `id_product`, `url`) VALUES
@@ -166,13 +171,13 @@ INSERT INTO `products_images` (`id`, `id_product`, `url`) VALUES
 (4, 4, '3.jpg'),
 (5, 8, '7.jpg'),
 (6, 7, '8.jpg'),
-(7, 5, '7.jpg'),
-(8, 6, '3.jpg');
+(7, 1, '7.jpg'),
+(8, 1, '3.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `products_options`
+-- Estrutura da tabela `products_options`
 --
 
 CREATE TABLE `products_options` (
@@ -182,10 +187,19 @@ CREATE TABLE `products_options` (
   `p_value` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `products_options`
+--
+
+INSERT INTO `products_options` (`id`, `id_product`, `id_option`, `p_value`) VALUES
+(1, 1, 1, 'Azul'),
+(2, 1, 2, '32cm'),
+(3, 1, 4, '20\"');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `purchases`
+-- Estrutura da tabela `purchases`
 --
 
 CREATE TABLE `purchases` (
@@ -200,7 +214,7 @@ CREATE TABLE `purchases` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `purchases_products`
+-- Estrutura da tabela `purchases_products`
 --
 
 CREATE TABLE `purchases_products` (
@@ -213,7 +227,7 @@ CREATE TABLE `purchases_products` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `purchase_transactions`
+-- Estrutura da tabela `purchase_transactions`
 --
 
 CREATE TABLE `purchase_transactions` (
@@ -226,7 +240,7 @@ CREATE TABLE `purchase_transactions` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `rates`
+-- Estrutura da tabela `rates`
 --
 
 CREATE TABLE `rates` (
@@ -238,102 +252,119 @@ CREATE TABLE `rates` (
   `comment` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `rates`
+--
+
+INSERT INTO `rates` (`id`, `id_product`, `id_user`, `date_rated`, `points`, `comment`) VALUES
+(1, 1, 1, '2019-09-30 00:00:00', 2, 'Excelente opção'),
+(2, 1, 2, '2019-09-30 00:00:00', 3, 'Ótima aquisição...');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `users`
+-- Estrutura da tabela `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
   `email` varchar(100) NOT NULL DEFAULT '',
-  `password` varchar(32) NOT NULL DEFAULT ''
+  `password` varchar(32) NOT NULL DEFAULT '',
+  `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Índices de tabelas apagadas
+-- Extraindo dados da tabela `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `name`) VALUES
+(1, 'valdir@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Valdir'),
+(2, 'julia@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Julia');
+
+--
+-- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `brands`
+-- Índices para tabela `brands`
 --
 ALTER TABLE `brands`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `categories`
+-- Índices para tabela `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `coupons`
+-- Índices para tabela `coupons`
 --
 ALTER TABLE `coupons`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `options`
+-- Índices para tabela `options`
 --
 ALTER TABLE `options`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `pages`
+-- Índices para tabela `pages`
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `products`
+-- Índices para tabela `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `products_images`
+-- Índices para tabela `products_images`
 --
 ALTER TABLE `products_images`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `products_options`
+-- Índices para tabela `products_options`
 --
 ALTER TABLE `products_options`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `purchases`
+-- Índices para tabela `purchases`
 --
 ALTER TABLE `purchases`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `purchases_products`
+-- Índices para tabela `purchases_products`
 --
 ALTER TABLE `purchases_products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `purchase_transactions`
+-- Índices para tabela `purchase_transactions`
 --
 ALTER TABLE `purchase_transactions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `rates`
+-- Índices para tabela `rates`
 --
 ALTER TABLE `rates`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `users`
+-- Índices para tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
@@ -382,7 +413,7 @@ ALTER TABLE `products_images`
 -- AUTO_INCREMENT de tabela `products_options`
 --
 ALTER TABLE `products_options`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `purchases`
@@ -406,13 +437,13 @@ ALTER TABLE `purchase_transactions`
 -- AUTO_INCREMENT de tabela `rates`
 --
 ALTER TABLE `rates`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

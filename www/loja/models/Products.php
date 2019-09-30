@@ -250,6 +250,7 @@ class Products extends Model
       //1 - Recuperar os nomes da opções
       $sql = "SELECT options FROM products WHERE id=:id";
       $sql = $this->db->prepare($sql);
+      // var_dump($sql);exit;
       $sql->bindValue(":id", $id);
       $sql->execute();
 
@@ -257,6 +258,7 @@ class Products extends Model
 
         $options = $sql->fetch();
         $options = $options['options'];
+
 
         if(!empty($options)){
           $sql = "SELECT * FROM options WHERE id IN(".$options.")";
