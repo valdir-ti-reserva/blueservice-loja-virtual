@@ -18,7 +18,7 @@
 			<div class="container">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="<?php echo BASE_URL; ?>">Home</a></li>
-					<li><a href="<?php echo BASE_URL; ?>contact">Contato</a></li>
+					<!-- <li><a href="<?php echo BASE_URL; ?>contact">Contato</a></li> -->
 					<li><a href="<?php echo BASE_URL; ?>admin">Admin</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

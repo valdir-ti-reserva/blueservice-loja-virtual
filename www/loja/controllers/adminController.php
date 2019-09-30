@@ -11,7 +11,14 @@ class adminController extends Controller
 
         $dados = array();
 
-        $this->loadAdminView('template', $dados);
+        $this->loadAdminTemplate('home', $dados);
+    }
+
+    public function categories() {
+
+        $dados = array();
+
+        $this->loadAdminTemplate('categories', $dados);
     }
 
 }

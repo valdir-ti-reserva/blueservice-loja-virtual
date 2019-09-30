@@ -261,8 +261,9 @@ desired effect
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="<?=BASE_URL?>"><i class="fa fa-reply"></i> <span>Retornar a Loja</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-        <li class="treeview">
+        <li><a href="<?=BASE_URL?>admin/categories"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
+
+        <!-- <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -272,7 +273,8 @@ desired effect
             <li><a href="#">Link in level 2</a></li>
             <li><a href="#">Link in level 2</a></li>
           </ul>
-        </li>
+        </li> -->
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -282,7 +284,7 @@ desired effect
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
-    <?php $this->loadAdminViewInTemplate('home', $viewData); ?>
+    <?php $this->loadAdminViewInTemplate($viewName, $viewData); ?>
 
   </div>
   <!-- /.content-wrapper -->
@@ -294,7 +296,7 @@ desired effect
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; <?php echo date('Y'); ?> <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
