@@ -54,7 +54,11 @@
     <td colspan="2">
       <strong>R$
         <?php
-          $frete = floatval(str_replace(',', '.', $shipping['price']));
+          if(isset($shipping['price'])){
+            $frete = floatval(str_replace(',', '.', $shipping['price']));
+          }else{
+            $frete = 0;
+          }
           $total = $subtotal + $frete;
           echo number_format($total, 2, ',' ,'.');
         ?>
