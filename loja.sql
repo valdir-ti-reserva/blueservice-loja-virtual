@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 30-Set-2019 às 11:42
+-- Tempo de geração: 30-Set-2019 às 20:56
 -- Versão do servidor: 8.0.17
 -- versão do PHP: 7.2.22
 
@@ -170,9 +170,12 @@ INSERT INTO `products_images` (`id`, `id_product`, `url`) VALUES
 (3, 2, '7.jpg'),
 (4, 4, '3.jpg'),
 (5, 8, '7.jpg'),
-(6, 7, '8.jpg'),
+(6, 1, '3.jpg'),
 (7, 1, '7.jpg'),
-(8, 1, '3.jpg');
+(8, 1, '3.jpg'),
+(9, 5, '3.jpg'),
+(10, 6, '7.jpg'),
+(11, 7, '3.jpg');
 
 -- --------------------------------------------------------
 
@@ -270,16 +273,18 @@ CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
   `email` varchar(100) NOT NULL DEFAULT '',
   `password` varchar(32) NOT NULL DEFAULT '',
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `token` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `name`) VALUES
-(1, 'valdir@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Valdir'),
-(2, 'julia@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Julia');
+INSERT INTO `users` (`id`, `email`, `password`, `name`, `admin`, `token`) VALUES
+(1, 'valdir@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Valdir', 1, ''),
+(2, 'julia@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Julia', 0, '');
 
 --
 -- Índices para tabelas despejadas
@@ -407,7 +412,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de tabela `products_images`
 --
 ALTER TABLE `products_images`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `products_options`
