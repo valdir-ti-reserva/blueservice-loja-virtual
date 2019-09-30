@@ -3,7 +3,7 @@ require 'environment.php';
 
 $config = array();
 if(ENVIRONMENT == 'development') {
-	define("BASE_URL", "http://localhost/painel/");
+	define("BASE_URL", "http://localhost:8001/painel/");
   $host 				      = $_SERVER['REMOTE_ADDR'];
 	$config['dbname'] 	= 'loja';
 	$config['host'] 	  = $host;
