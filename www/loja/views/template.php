@@ -3,14 +3,13 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Loja Virtual</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
 		<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" type="text/css" />
-
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/jquery-ui.min.css" type="text/css" />
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/jquery-ui.structure.css" type="text/css" />
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/jquery-ui.theme.css" type="text/css" />
-
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" type="text/css" />
 
 	</head>
@@ -20,6 +19,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="<?php echo BASE_URL; ?>">Home</a></li>
 					<li><a href="<?php echo BASE_URL; ?>contact">Contato</a></li>
+					<li><a href="<?php echo BASE_URL; ?>admin">Admin</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
