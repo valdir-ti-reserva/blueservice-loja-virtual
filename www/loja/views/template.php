@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 		<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/jquery-ui.min.css" type="text/css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/jquery-ui.structure.css" type="text/css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/jquery-ui.theme.css" type="text/css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="<?=BASE_URL; ?>assets/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="<?=BASE_URL; ?>assets/css/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="<?=BASE_URL; ?>assets/css/jquery-ui.structure.css" type="text/css" />
+    <link rel="stylesheet" href="<?=BASE_URL; ?>assets/css/jquery-ui.theme.css" type="text/css" />
+    <link rel="stylesheet" href="<?=BASE_URL; ?>assets/css/style.css" type="text/css" />
 
 	</head>
 	<body>
 		<nav class="navbar topnav">
 			<div class="container">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="<?php echo BASE_URL; ?>">Home</a></li>
-					<!-- <li><a href="<?php echo BASE_URL; ?>contact">Contato</a></li> -->
-					<li><a href="<?php echo BASE_URL; ?>admin">Admin</a></li>
+					<li class="active"><a href="<?=BASE_URL; ?>">Home</a></li>
+					<!-- <li><a href="<?=BASE_URL; ?>contact">Contato</a></li> -->
+					<li><a href="http://localhost:8001/painel/">Admin</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
@@ -31,7 +31,7 @@
 							<li><a href="#">Espanhol</a></li>
 						</ul>
 					</li>
-					<li><a href="<?php echo BASE_URL; ?>login">Login</a></li>
+					<li><a href="<?=BASE_URL; ?>login">Login</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -39,7 +39,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-2 logo">
-						<a href="<?php echo BASE_URL; ?>"><img src="<?php echo BASE_URL; ?>assets/images/logo.png" /></a>
+						<a href="<?=BASE_URL; ?>"><img src="<?=BASE_URL; ?>assets/images/logo.png" /></a>
 					</div>
 					<div class="col-sm-7">
 						<div class="head_help">(11) 9999-9999</div>
@@ -77,7 +77,7 @@
 
 					</div>
 					<div class="col-sm-3">
-						<a href="<?php echo BASE_URL; ?>cart">
+						<a href="<?=BASE_URL; ?>cart">
 							<div class="cartarea">
 								<div class="carticon">
 									<div class="cartqt"><?=$viewData['cart_qt']?></div>
@@ -204,7 +204,7 @@
 	    		<div class="container">
 	    			<div class="row">
 						<div class="col-sm-4">
-							<a href="<?php echo BASE_URL; ?>"><img width="150" src="<?php echo BASE_URL; ?>assets/images/logo.png" /></a><br/><br/>
+							<a href="<?=BASE_URL; ?>"><img width="150" src="<?=BASE_URL; ?>assets/images/logo.png" /></a><br/><br/>
 							<strong>Slogan da Loja Virtual</strong><br/><br/>
 							Endereço da Loja Virtual
 						</div>
@@ -254,10 +254,10 @@
 						<div class="col-sm-6">© <span>Loja Virtual</span> - Todos os direitos reservados.</div>
 						<div class="col-sm-6">
 							<div class="payments">
-								<img src="<?php echo BASE_URL; ?>assets/images/visa.png" />
-								<img src="<?php echo BASE_URL; ?>assets/images/visa.png" />
-								<img src="<?php echo BASE_URL; ?>assets/images/visa.png" />
-								<img src="<?php echo BASE_URL; ?>assets/images/visa.png" />
+								<img src="<?=BASE_URL; ?>assets/images/visa.png" />
+								<img src="<?=BASE_URL; ?>assets/images/visa.png" />
+								<img src="<?=BASE_URL; ?>assets/images/visa.png" />
+								<img src="<?=BASE_URL; ?>assets/images/visa.png" />
 							</div>
 						</div>
 					</div>
@@ -265,15 +265,15 @@
 	    	</div>
       </footer>
     <script type="text/javascript">
-      var BASE_URL     = '<?php echo BASE_URL; ?>';
+      var BASE_URL     = '<?=BASE_URL; ?>';
       <?php if(isset($viewData['filters'])):?>
         var maxSlider    = <?=$viewData['filters']['maxSlider']?>;
       <?php endif?>
       // var sliderValues = [0, maxSlider];
     </script>
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/script.js"></script>
+    <script type="text/javascript" src="<?=BASE_URL; ?>assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?=BASE_URL; ?>assets/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="<?=BASE_URL; ?>assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?=BASE_URL; ?>assets/js/script.js"></script>
 	</body>
 </html>
