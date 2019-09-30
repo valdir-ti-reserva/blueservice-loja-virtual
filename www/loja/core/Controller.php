@@ -20,19 +20,4 @@ class Controller {
 		extract($viewData);
 		include 'views/'.$viewName.'.php';
   }
-
-  public function loadAdminView($viewName, $viewData = array()) {
-		extract($viewData);
-		include 'views/admin/'.$viewName.'.php';
-	}
-
-	public function loadAdminTemplate($viewName, $viewData = array()) {
-		include 'views/admin/template.php';
-	}
-
-  public function loadAdminViewInTemplate($viewName, $viewData) {
-		extract($viewData);
-		include 'views/admin/'.$viewName.'.php';
-	}
-
 }
