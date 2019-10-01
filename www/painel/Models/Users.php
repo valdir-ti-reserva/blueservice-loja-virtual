@@ -19,12 +19,16 @@ class Users extends Model {
     $sql->execute();
 
     if($sql->rowCount() > 0){
-      $data = $sql->fetch();
+
+      $data      = $sql->fetch();
       $this->uid = $data['id'];
 
       return true;
+
     }
+
     return false;
+
   }
 
   public function getId(){

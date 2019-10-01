@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 30-Set-2019 às 20:56
+-- Tempo de geração: 01/10/2019 às 00:40
 -- Versão do servidor: 8.0.17
--- versão do PHP: 7.2.22
+-- Versão do PHP: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `brands`
+-- Estrutura para tabela `brands`
 --
 
 CREATE TABLE `brands` (
@@ -34,17 +34,19 @@ CREATE TABLE `brands` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `brands`
+-- Despejando dados para a tabela `brands`
 --
 
 INSERT INTO `brands` (`id`, `name`) VALUES
 (1, 'LG'),
-(2, 'AOC');
+(2, 'AOC'),
+(3, 'Samsung'),
+(4, 'Apple');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categories`
+-- Estrutura para tabela `categories`
 --
 
 CREATE TABLE `categories` (
@@ -54,16 +56,22 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `categories`
+-- Despejando dados para a tabela `categories`
 --
 
 INSERT INTO `categories` (`id`, `sub`, `name`) VALUES
-(1, NULL, 'Monitor');
+(1, NULL, 'Monitor'),
+(2, NULL, 'Som'),
+(3, 2, 'Headphone'),
+(4, 3, 'Com Fio'),
+(5, 3, 'Sem Fio'),
+(6, 2, 'Microfone'),
+(7, 1, 'Gamer');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `coupons`
+-- Estrutura para tabela `coupons`
 --
 
 CREATE TABLE `coupons` (
@@ -76,7 +84,7 @@ CREATE TABLE `coupons` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `options`
+-- Estrutura para tabela `options`
 --
 
 CREATE TABLE `options` (
@@ -85,7 +93,7 @@ CREATE TABLE `options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `options`
+-- Despejando dados para a tabela `options`
 --
 
 INSERT INTO `options` (`id`, `name`) VALUES
@@ -97,7 +105,7 @@ INSERT INTO `options` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pages`
+-- Estrutura para tabela `pages`
 --
 
 CREATE TABLE `pages` (
@@ -109,7 +117,7 @@ CREATE TABLE `pages` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `products`
+-- Estrutura para tabela `products`
 --
 
 CREATE TABLE `products` (
@@ -128,30 +136,30 @@ CREATE TABLE `products` (
   `new_product` tinyint(1) NOT NULL,
   `options` varchar(200) DEFAULT NULL,
   `weight` float DEFAULT NULL,
+  `height` float DEFAULT NULL,
+  `width` float DEFAULT NULL,
   `length` float DEFAULT NULL,
-  `height` int(11) DEFAULT NULL,
-  `width` int(11) DEFAULT NULL,
-  `diameter` int(11) DEFAULT NULL
+  `diameter` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `products`
+-- Despejando dados para a tabela `products`
 --
 
-INSERT INTO `products` (`id`, `id_category`, `id_brand`, `name`, `description`, `stock`, `price`, `price_from`, `rating`, `featured`, `sale`, `bestseller`, `new_product`, `options`, `weight`, `length`, `height`, `width`, `diameter`) VALUES
-(1, 1, 1, 'Monitor 21\"', 'Descrição do monitor', 10, 499, 599, 0, 0, 1, 1, 0, '1,2,4', 0.9, 15, 20, 15, 20),
-(2, 1, 2, 'Monitor 18\"', 'Descrição do outro monitor', 10, 399, 499, 0, 0, 0, 0, 0, '1,2', 0.8, 15, 20, 15, 20),
-(3, 1, 1, 'Monitor 23\"', 'Descrição do outro monitor', 10, 399, 466, 0, 0, 1, 0, 0, '1,4', 0.7, 15, 20, 15, 20),
-(4, 2, 2, 'Monitor 19\"', 'Descrição do outro monitor', 10, 125, 0, 0, 0, 0, 0, 0, '2,4', 0.6, 15, 20, 15, 20),
-(5, 2, 1, 'Monitor 14\"', 'Descrição do outro monitor', 10, 500, 300, 0, 0, 0, 0, 1, '1,2', 0.3, 15, 20, 15, 20),
-(6, 2, 2, 'Monitor 20\"', 'Descrição do outro monitor', 10, 325, 300, 0, 0, 0, 1, 0, '4,2,1', 0.2, 15, 20, 15, 20),
-(7, 2, 1, 'Monitor 17\"', 'Descrição do outro monitor', 10, 315, 300, 0, 0, 0, 0, 1, '4,1', 0.4, 15, 20, 15, 20),
-(8, 2, 2, 'Monitor 19\"', 'Descrição do outro monitor', 10, 125, 300, 0, 0, 0, 0, 0, '1,2,4', 0.8, 15, 20, 15, 20);
+INSERT INTO `products` (`id`, `id_category`, `id_brand`, `name`, `description`, `stock`, `price`, `price_from`, `rating`, `featured`, `sale`, `bestseller`, `new_product`, `options`, `weight`, `height`, `width`, `length`, `diameter`) VALUES
+(1, 1, 1, 'Monitor 21\"', 'Descrição do monitor', 10, 499, 599, 0, 0, 1, 1, 0, '1,2,4', 0.9, 15, 20, 20, 15),
+(2, 1, 2, 'Monitor 18\"', 'Descrição do outro monitor', 10, 399, 499, 2, 0, 0, 0, 0, '1,2', 0.8, 15, 20, 20, 15),
+(3, 7, 1, 'Monitor 23\"', 'Descrição do outro monitor', 10, 399, 466, 0, 0, 0, 0, 0, '1,4', 0.7, 15, 20, 20, 15),
+(4, 2, 2, 'Monitor 19\"', 'Descrição do outro monitor', 10, 125, 0, 0, 0, 0, 0, 0, '1', 0.6, 15, 20, 20, 15),
+(5, 2, 4, 'Monitor 14\"', 'Descrição do outro monitor', 10, 899, 300, 1, 0, 0, 0, 1, '1,2,4', 0.5, 15, 20, 20, 15),
+(6, 2, 3, 'Monitor 20\"', 'Descrição do outro monitor', 10, 325, 300, 0, 0, 0, 1, 0, '2,4', 0.4, 15, 20, 20, 15),
+(7, 4, 1, 'Monitor 17\"', 'Descrição do outro monitor', 10, 315, 300, 5, 0, 0, 0, 1, '4', 0.3, 15, 20, 20, 15),
+(8, 2, 2, 'Monitor 19\"', 'Descrição do outro monitor', 10, 125, 300, 5, 0, 0, 0, 0, '1,4', 0.2, 15, 20, 20, 15);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `products_images`
+-- Estrutura para tabela `products_images`
 --
 
 CREATE TABLE `products_images` (
@@ -161,7 +169,7 @@ CREATE TABLE `products_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `products_images`
+-- Despejando dados para a tabela `products_images`
 --
 
 INSERT INTO `products_images` (`id`, `id_product`, `url`) VALUES
@@ -170,17 +178,17 @@ INSERT INTO `products_images` (`id`, `id_product`, `url`) VALUES
 (3, 2, '7.jpg'),
 (4, 4, '3.jpg'),
 (5, 8, '7.jpg'),
-(6, 1, '3.jpg'),
+(6, 7, '8.jpg'),
 (7, 1, '7.jpg'),
-(8, 1, '3.jpg'),
-(9, 5, '3.jpg'),
-(10, 6, '7.jpg'),
-(11, 7, '3.jpg');
+(8, 5, '3.jpg'),
+(9, 1, '7.jpg'),
+(10, 1, '8.jpg'),
+(11, 6, '3.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `products_options`
+-- Estrutura para tabela `products_options`
 --
 
 CREATE TABLE `products_options` (
@@ -191,18 +199,20 @@ CREATE TABLE `products_options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `products_options`
+-- Despejando dados para a tabela `products_options`
 --
 
 INSERT INTO `products_options` (`id`, `id_product`, `id_option`, `p_value`) VALUES
 (1, 1, 1, 'Azul'),
-(2, 1, 2, '32cm'),
-(3, 1, 4, '20\"');
+(2, 1, 2, '23cm'),
+(3, 1, 4, '21'),
+(4, 2, 1, 'Azul'),
+(5, 2, 2, '19cm');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `purchases`
+-- Estrutura para tabela `purchases`
 --
 
 CREATE TABLE `purchases` (
@@ -217,7 +227,7 @@ CREATE TABLE `purchases` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `purchases_products`
+-- Estrutura para tabela `purchases_products`
 --
 
 CREATE TABLE `purchases_products` (
@@ -230,7 +240,7 @@ CREATE TABLE `purchases_products` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `purchase_transactions`
+-- Estrutura para tabela `purchase_transactions`
 --
 
 CREATE TABLE `purchase_transactions` (
@@ -243,7 +253,7 @@ CREATE TABLE `purchase_transactions` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `rates`
+-- Estrutura para tabela `rates`
 --
 
 CREATE TABLE `rates` (
@@ -256,17 +266,17 @@ CREATE TABLE `rates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `rates`
+-- Despejando dados para a tabela `rates`
 --
 
 INSERT INTO `rates` (`id`, `id_product`, `id_user`, `date_rated`, `points`, `comment`) VALUES
-(1, 1, 1, '2019-09-30 00:00:00', 2, 'Excelente opção'),
-(2, 1, 2, '2019-09-30 00:00:00', 3, 'Ótima aquisição...');
+(1, 1, 1, '2019-09-29 00:00:00', 3, 'Produto muito bom...'),
+(2, 1, 2, '2019-09-30 00:00:00', 2, 'Excelente experiência...');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Estrutura para tabela `users`
 --
 
 CREATE TABLE `users` (
@@ -279,7 +289,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `users`
+-- Despejando dados para a tabela `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `admin`, `token`) VALUES
@@ -287,102 +297,102 @@ INSERT INTO `users` (`id`, `email`, `password`, `name`, `admin`, `token`) VALUES
 (2, 'julia@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Julia', 0, '');
 
 --
--- Índices para tabelas despejadas
+-- Índices de tabelas apagadas
 --
 
 --
--- Índices para tabela `brands`
+-- Índices de tabela `brands`
 --
 ALTER TABLE `brands`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `categories`
+-- Índices de tabela `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `coupons`
+-- Índices de tabela `coupons`
 --
 ALTER TABLE `coupons`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `options`
+-- Índices de tabela `options`
 --
 ALTER TABLE `options`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `pages`
+-- Índices de tabela `pages`
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `products`
+-- Índices de tabela `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `products_images`
+-- Índices de tabela `products_images`
 --
 ALTER TABLE `products_images`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `products_options`
+-- Índices de tabela `products_options`
 --
 ALTER TABLE `products_options`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `purchases`
+-- Índices de tabela `purchases`
 --
 ALTER TABLE `purchases`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `purchases_products`
+-- Índices de tabela `purchases_products`
 --
 ALTER TABLE `purchases_products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `purchase_transactions`
+-- Índices de tabela `purchase_transactions`
 --
 ALTER TABLE `purchase_transactions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `rates`
+-- Índices de tabela `rates`
 --
 ALTER TABLE `rates`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `users`
+-- Índices de tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `coupons`
@@ -418,7 +428,7 @@ ALTER TABLE `products_images`
 -- AUTO_INCREMENT de tabela `products_options`
 --
 ALTER TABLE `products_options`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `purchases`
