@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
+  <title>Loja Virtual | Login</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -34,22 +34,23 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Faça o login</p>
+    <p class="login-box-msg">Faça o login no painel administrativo</p>
+    <p class="login-box-msg">Teste com: valdir@mail.com</p>
+    <p class="login-box-msg">Senha: 123456</p>
 
-    <form action="<?=BASE_URL?>login/index_active" method="post">
+    <form action="<?=BASE_URL?>login/index_active" method="POST">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" name="email" placeholder="Email">
+        <input type="email" class="form-control" name="email" placeholder="Email" autocomplete="off">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="password" placeholder="Senha">
+        <input type="password" class="form-control" name="password" placeholder="Senha" autocomplete="off">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
 
-          <a href="#">Esqueci a senha</a><br>
-          <a href="register.html" class="text-center">Registrar um novo usuário</a>
+          <a href="#">Esqueci a senha</a>
 
         </div>
         <!-- /.col -->
