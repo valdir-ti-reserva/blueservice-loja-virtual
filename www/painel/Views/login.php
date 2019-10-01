@@ -38,6 +38,16 @@
     <p class="login-box-msg">Teste com: valdir@mail.com</p>
     <p class="login-box-msg">Senha: 123456</p>
 
+    <?php if(!empty($error)):?>
+
+      <div class="callout callout-danger">
+
+      <p><?=$error?></p>
+
+      </div>
+
+    <?php endif?>
+
     <form action="<?=BASE_URL?>login/index_active" method="POST">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" name="email" placeholder="Email" autocomplete="off">
