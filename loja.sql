@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 01/10/2019 às 00:40
+-- Tempo de geração: 03-Out-2019 às 16:56
 -- Versão do servidor: 8.0.17
--- Versão do PHP: 7.2.14
+-- versão do PHP: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `brands`
+-- Estrutura da tabela `brands`
 --
 
 CREATE TABLE `brands` (
@@ -34,7 +34,7 @@ CREATE TABLE `brands` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `brands`
+-- Extraindo dados da tabela `brands`
 --
 
 INSERT INTO `brands` (`id`, `name`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `brands` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `categories`
+-- Estrutura da tabela `categories`
 --
 
 CREATE TABLE `categories` (
@@ -56,7 +56,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `categories`
+-- Extraindo dados da tabela `categories`
 --
 
 INSERT INTO `categories` (`id`, `sub`, `name`) VALUES
@@ -71,7 +71,7 @@ INSERT INTO `categories` (`id`, `sub`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `coupons`
+-- Estrutura da tabela `coupons`
 --
 
 CREATE TABLE `coupons` (
@@ -84,7 +84,7 @@ CREATE TABLE `coupons` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `options`
+-- Estrutura da tabela `options`
 --
 
 CREATE TABLE `options` (
@@ -93,7 +93,7 @@ CREATE TABLE `options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `options`
+-- Extraindo dados da tabela `options`
 --
 
 INSERT INTO `options` (`id`, `name`) VALUES
@@ -105,7 +105,7 @@ INSERT INTO `options` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `pages`
+-- Estrutura da tabela `pages`
 --
 
 CREATE TABLE `pages` (
@@ -117,7 +117,70 @@ CREATE TABLE `pages` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `products`
+-- Estrutura da tabela `permission_groups`
+--
+
+CREATE TABLE `permission_groups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `permission_groups`
+--
+
+INSERT INTO `permission_groups` (`id`, `name`) VALUES
+(1, 'SuperAdministrador'),
+(2, 'Administrador'),
+(3, 'Gerente'),
+(4, 'Vendedor');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `permission_items`
+--
+
+CREATE TABLE `permission_items` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `slug` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `permission_items`
+--
+
+INSERT INTO `permission_items` (`id`, `name`, `slug`) VALUES
+(1, 'Criar Cupom de Oferta', 'coupons_create'),
+(2, 'Ver Permissões', 'permissions_view');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `permission_links`
+--
+
+CREATE TABLE `permission_links` (
+  `id` int(11) NOT NULL,
+  `id_permission_group` int(11) NOT NULL,
+  `id_permission_item` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `permission_links`
+--
+
+INSERT INTO `permission_links` (`id`, `id_permission_group`, `id_permission_item`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1),
+(4, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `products`
 --
 
 CREATE TABLE `products` (
@@ -143,7 +206,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `products`
+-- Extraindo dados da tabela `products`
 --
 
 INSERT INTO `products` (`id`, `id_category`, `id_brand`, `name`, `description`, `stock`, `price`, `price_from`, `rating`, `featured`, `sale`, `bestseller`, `new_product`, `options`, `weight`, `height`, `width`, `length`, `diameter`) VALUES
@@ -159,7 +222,7 @@ INSERT INTO `products` (`id`, `id_category`, `id_brand`, `name`, `description`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `products_images`
+-- Estrutura da tabela `products_images`
 --
 
 CREATE TABLE `products_images` (
@@ -169,7 +232,7 @@ CREATE TABLE `products_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `products_images`
+-- Extraindo dados da tabela `products_images`
 --
 
 INSERT INTO `products_images` (`id`, `id_product`, `url`) VALUES
@@ -188,7 +251,7 @@ INSERT INTO `products_images` (`id`, `id_product`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `products_options`
+-- Estrutura da tabela `products_options`
 --
 
 CREATE TABLE `products_options` (
@@ -199,7 +262,7 @@ CREATE TABLE `products_options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `products_options`
+-- Extraindo dados da tabela `products_options`
 --
 
 INSERT INTO `products_options` (`id`, `id_product`, `id_option`, `p_value`) VALUES
@@ -212,7 +275,7 @@ INSERT INTO `products_options` (`id`, `id_product`, `id_option`, `p_value`) VALU
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `purchases`
+-- Estrutura da tabela `purchases`
 --
 
 CREATE TABLE `purchases` (
@@ -227,7 +290,7 @@ CREATE TABLE `purchases` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `purchases_products`
+-- Estrutura da tabela `purchases_products`
 --
 
 CREATE TABLE `purchases_products` (
@@ -240,7 +303,7 @@ CREATE TABLE `purchases_products` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `purchase_transactions`
+-- Estrutura da tabela `purchase_transactions`
 --
 
 CREATE TABLE `purchase_transactions` (
@@ -253,7 +316,7 @@ CREATE TABLE `purchase_transactions` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `rates`
+-- Estrutura da tabela `rates`
 --
 
 CREATE TABLE `rates` (
@@ -266,7 +329,7 @@ CREATE TABLE `rates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `rates`
+-- Extraindo dados da tabela `rates`
 --
 
 INSERT INTO `rates` (`id`, `id_product`, `id_user`, `date_rated`, `points`, `comment`) VALUES
@@ -276,11 +339,12 @@ INSERT INTO `rates` (`id`, `id_product`, `id_user`, `date_rated`, `points`, `com
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `users`
+-- Estrutura da tabela `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
+  `id_permission` int(11) DEFAULT NULL,
   `email` varchar(100) NOT NULL DEFAULT '',
   `password` varchar(32) NOT NULL DEFAULT '',
   `name` varchar(100) NOT NULL,
@@ -289,97 +353,115 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `users`
+-- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `name`, `admin`, `token`) VALUES
-(1, 'valdir@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Valdir', 1, ''),
-(2, 'julia@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Julia', 0, '');
+INSERT INTO `users` (`id`, `id_permission`, `email`, `password`, `name`, `admin`, `token`) VALUES
+(1, 1, 'valdir@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Valdir', 1, 'a6e309a801dd98cc076b9204bfe51760'),
+(2, 3, 'julia@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Julia', 0, '');
 
 --
--- Índices de tabelas apagadas
+-- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `brands`
+-- Índices para tabela `brands`
 --
 ALTER TABLE `brands`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `categories`
+-- Índices para tabela `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `coupons`
+-- Índices para tabela `coupons`
 --
 ALTER TABLE `coupons`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `options`
+-- Índices para tabela `options`
 --
 ALTER TABLE `options`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `pages`
+-- Índices para tabela `pages`
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `products`
+-- Índices para tabela `permission_groups`
+--
+ALTER TABLE `permission_groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `permission_items`
+--
+ALTER TABLE `permission_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `permission_links`
+--
+ALTER TABLE `permission_links`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `products_images`
+-- Índices para tabela `products_images`
 --
 ALTER TABLE `products_images`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `products_options`
+-- Índices para tabela `products_options`
 --
 ALTER TABLE `products_options`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `purchases`
+-- Índices para tabela `purchases`
 --
 ALTER TABLE `purchases`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `purchases_products`
+-- Índices para tabela `purchases_products`
 --
 ALTER TABLE `purchases_products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `purchase_transactions`
+-- Índices para tabela `purchase_transactions`
 --
 ALTER TABLE `purchase_transactions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `rates`
+-- Índices para tabela `rates`
 --
 ALTER TABLE `rates`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `users`
+-- Índices para tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
@@ -411,6 +493,24 @@ ALTER TABLE `options`
 --
 ALTER TABLE `pages`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `permission_groups`
+--
+ALTER TABLE `permission_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `permission_items`
+--
+ALTER TABLE `permission_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `permission_links`
+--
+ALTER TABLE `permission_links`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `products`
