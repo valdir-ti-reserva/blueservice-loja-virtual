@@ -20,7 +20,10 @@ class HomeController extends Controller {
   }
 
 	public function index() {
-		$array = array();
+    $array = array(
+      'user'=>$this->user
+    );
+
 
 		$this->loadTemplate('home', $array);
 	}

@@ -36,6 +36,16 @@ class Users extends Model {
 
   }
 
+  public function hasPermission($permission_slug){
+
+    if(in_array($permission_slug, $this->permissions)){
+      return true;
+    }
+
+    return false;
+
+  }
+
   public function validateLogin($email, $pass){
 
     $sql = "SELECT id FROM users WHERE email = :email AND password = :password AND admin = 1";

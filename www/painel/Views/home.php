@@ -16,5 +16,10 @@
         | Your Page Content Here |
         -------------------------->
       HOME
+      <br>
+
+      <?php if($user->hasPermission('permissions_view')):?>
+        Tem permissões
+      <?php endif?>
 
     </section>

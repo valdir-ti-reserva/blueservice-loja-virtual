@@ -260,7 +260,13 @@ desired effect
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="http://localhost:8001/loja/"><i class="fa fa-link"></i> <span>Ir para a loja</span></a></li>
+
+        <?php if($viewData['user']->hasPermission('permissions_view')):?>
+          <li><a href="<?=BASE_URL?>permissions"><i class="fa fa-link"></i> <span>Permissões</span></a></li>
+        <?php endif?>
+
         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">
