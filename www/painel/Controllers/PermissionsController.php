@@ -40,6 +40,42 @@ class PermissionsController extends Controller {
   }
 
   public function add(){
+    $array = array(
+      'user'=>$this->user
+    );
+
+    $p = new Permissions();
+    $array['permission_items'] = $p->getAllItems();
+    $this->loadTemplate('permissions_add', $array);
+  }
+
+  public function add_action(){
+
+    if(!empty($_POST['name'])){
+
+      $name = $_POST['name'];
+      $p    = new Permissions();
+      $id   = $p->addGroup($name);
+
+      if(isset($_POST['items']) && count($_POST['items']) > 0){
+
+        $items = $_POST['items'];
+
+        foreach($items as $item){
+          $p->linkItemToGroup($item, $id);
+        }
+      }
+
+      header("Location: ".BASE_URL."permissions");
+      exit;
+
+    }else{
+
+      //Observações
+
+      header("Location: ".BASE_URL."permissions/add");
+      exit;
+    }
 
   }
 
