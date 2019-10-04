@@ -34,7 +34,7 @@
                 <td>
                   <div class="btn-group">
                     <a href="<?=BASE_URL?>permissions/edit/<?=$item['id']?>" class="btn btn-xs btn-primary">Editar</a>
-                    <a href="<?=BASE_URL?>permissions/del/<?=$item['id']?>" class="btn btn-xs btn-danger <?php echo($item['total_users']!=0?'disabled':'');?>">Excluir</a>
+                    <a href="<?=BASE_URL?>permissions/del/<?=$item['id']?>" onclick="return confirm('Deseja realmente excluir o grupo?')" class="btn btn-xs btn-danger <?php echo($item['total_users']!=0?'disabled':'');?>">Excluir</a>
                   </div>
                 </td>
               </tr>

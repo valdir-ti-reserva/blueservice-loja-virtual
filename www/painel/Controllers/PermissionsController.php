@@ -49,6 +49,14 @@ class PermissionsController extends Controller {
 
   public function del($id){
 
+    $p = new Permissions();
+
+    $p->deleteGroup($id);
+
+
+    header("Location: ".BASE_URL."permissions");
+    exit;
+
   }
 
 }
