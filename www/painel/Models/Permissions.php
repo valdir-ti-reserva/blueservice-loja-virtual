@@ -5,10 +5,21 @@ use \Core\Model;
 
 class Permissions extends Model {
 
-	public function getAll() {
-		$array = array();
+	public function getAllGroup() {
+    $array = array();
 
-		return $array;
+    $sql = "SELECT permission_groups.*,
+              (
+                select count(users.id) from users where users.id_permission = permission_groups.id
+              ) as total_users
+              FROM permission_groups";
+    $sql = $this->db->query($sql);
+
+    if($sql->rowCount() > 0){
+      $array = $sql->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+  	return $array;
   }
 
   public function getPermissions($id_permission){
@@ -30,7 +41,9 @@ class Permissions extends Model {
         $ids[] = $dataItem['id_permission_item'];
       }
 
-      $sql = "SELECT slug FROM permission_items WHERE id IN(".implode(',',$ids).")";
+      $sql = "SELECT slug
+                FROM permission_items
+                  WHERE id IN(".implode(',',$ids).")";
       $sql = $this->db->query($sql);
 
       if($sql->rowCount() > 0){

@@ -3,6 +3,7 @@ namespace Controllers;
 
 use \Core\Controller;
 use \Models\Users;
+use \Models\Permissions;
 
 class PermissionsController extends Controller {
 
@@ -18,7 +19,6 @@ class PermissionsController extends Controller {
     }
 
     if(!$this->user->hasPermission('permissions_view')){
-
       header("Location: ".BASE_URL);
       exit;
     }
@@ -28,10 +28,27 @@ class PermissionsController extends Controller {
 
     $array = array(
       'user'=>$this->user,
+      'list'=>array()
     );
+
+    $p = new Permissions();
+    $array['list'] = $p->getAllGroup();
+
 
     $this->loadTemplate('permissions', $array);
 
-	}
+  }
+
+  public function add(){
+
+  }
+
+  public function edit($id){
+
+  }
+
+  public function del($id){
+
+  }
 
 }
