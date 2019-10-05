@@ -1,7 +1,7 @@
 <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        Loja Virtual
+        <small>Administração loja virtual</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
