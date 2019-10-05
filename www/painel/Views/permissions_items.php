@@ -12,12 +12,10 @@
         -------------------------->
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Grupos de Permissões</h3>
+          <h3 class="box-title">Itens de Permissões</h3>
           <div class="box-tools">
 
-            <a href="<?=BASE_URL?>permissions/items" class="btn btn-primary">Items de Permissão</a>
-
-            <a href="<?=BASE_URL?>permissions/add" class="btn btn-success">Adicionar</a>
+            <a href="<?=BASE_URL?>permissions/items_add" class="btn btn-success">Adicionar</a>
 
           </div>
         </div>
@@ -26,19 +24,19 @@
           <table class="table">
 
             <tr>
-              <th>Nome da Permissão</th>
-              <th>Qtd. de Ativos</th>
+              <th>Nome do item de Permissão</th>
+              <th>Slug</th>
               <th width="220">Ações</th>
             </tr>
 
             <?php foreach($list as $item):?>
               <tr>
                 <td><?=$item['name']?></td>
-                <td><?=$item['total_users']?></td>
+                <td><?=$item['slug']?></td>
                 <td>
                   <div class="btn-group">
-                    <a href="<?=BASE_URL?>permissions/edit/<?=$item['id']?>" class="btn btn-xs btn-primary">Editar</a>
-                    <a href="<?=BASE_URL?>permissions/del/<?=$item['id']?>" onclick="return confirm('Deseja realmente excluir o grupo?')" class="btn btn-xs btn-danger <?php echo($item['total_users']!=0?'disabled':'');?>">Excluir</a>
+                    <a href="<?=BASE_URL?>permissions/items_edit/<?=$item['id']?>" class="btn btn-xs btn-primary">Editar</a>
+                    <a href="<?=BASE_URL?>permissions/items_del/<?=$item['id']?>" onclick="return confirm('Deseja realmente excluir o item?')" class="btn btn-xs btn-danger">Excluir</a>
                   </div>
                 </td>
               </tr>

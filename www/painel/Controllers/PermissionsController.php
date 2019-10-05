@@ -39,6 +39,18 @@ class PermissionsController extends Controller {
 
   }
 
+  public function items(){
+    $array = array(
+      'user'=>$this->user,
+      'list'=>array()
+    );
+
+    $p = new Permissions();
+    $array['list'] = $p->getAllItems();
+
+    $this->loadTemplate('permissions_items', $array);
+  }
+
   public function add(){
     $array = array(
       'user'=>$this->user,
