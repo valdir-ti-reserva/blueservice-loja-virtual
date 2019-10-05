@@ -41,11 +41,18 @@ class PermissionsController extends Controller {
 
   public function add(){
     $array = array(
-      'user'=>$this->user
+      'user'=>$this->user,
+      'errorItems'=>array()
     );
 
     $p = new Permissions();
     $array['permission_items'] = $p->getAllItems();
+
+    if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
+      $array['errorItems'] = $_SESSION['formError'];
+      unset($_SESSION['formError']);
+    }
+
     $this->loadTemplate('permissions_add', $array);
   }
 
@@ -72,6 +79,7 @@ class PermissionsController extends Controller {
     }else{
 
       //Observações
+      $_SESSION['formError'] = array('name');
 
       header("Location: ".BASE_URL."permissions/add");
       exit;

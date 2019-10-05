@@ -21,7 +21,7 @@
             </div>
             <div class="box-body">
 
-              <div class="form-group">
+              <div class="form-group <?= (in_array('name', $errorItems))?'has-error':'' ?>">
                 <label for="group_name">Nome do grupo</label>
                 <input type="text" class="form-control" id="group_name" name="name"/>
               </div>
