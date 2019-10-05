@@ -48,6 +48,37 @@ class Permissions extends Model {
     return $array;
   }
 
+  public function getItem($id){
+    $sql = "SELECT * FROM permission_items WHERE id = :id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
+    if($sql->rowCount() > 0){
+      $data = $sql->fetch(\PDO::FETCH_ASSOC);
+      return $data;
+    }
+  }
+
+  public function editItemName($name, $id){
+    $sql = "UPDATE permission_items SET name=:name WHERE id=:id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":name", $name);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+  }
+
+  public function addItem($name, $slug){
+
+    $sql = "INSERT INTO permission_items (name, slug) VALUES (:name, :slug)";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":name", $name);
+    $sql->bindValue(":slug", $slug);
+    $sql->execute();
+
+    return $this->db->lastInsertId();
+  }
+
   public function getPermissions($id_permission){
 
     $array = array();
@@ -119,6 +150,22 @@ class Permissions extends Model {
     $sql->bindValue(":id_group", $id_group);
     $sql->execute();
 
+  }
+
+  public function deleteItem($id){
+
+    $sql = "DELETE FROM permission_items WHERE id=:id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+  }
+
+  public function deleteItemLinks($id){
+
+    $sql = "DELETE FROM permission_links WHERE id_permission_item=:id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
   }
 
   public function deleteGroup($id){

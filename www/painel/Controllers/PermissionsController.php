@@ -51,6 +51,102 @@ class PermissionsController extends Controller {
     $this->loadTemplate('permissions_items', $array);
   }
 
+  public function items_add(){
+      $array = array(
+        'user'=>$this->user,
+        'errorItems'=>array()
+      );
+
+      $p = new Permissions();
+      $array['permission_items'] = $p->getAllItems();
+
+      if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
+        $array['errorItems'] = $_SESSION['formError'];
+        unset($_SESSION['formError']);
+      }
+
+      $this->loadTemplate('permissions_items_add', $array);
+  }
+
+  public function add_items_action(){
+
+    if(!empty($_POST['name']) && !empty($_POST['slug'])){
+
+      $name = $_POST['name'];
+      $slug = $_POST['slug'];
+      $p    = new Permissions();
+      $p->addItem($name, $slug);
+
+      header("Location: ".BASE_URL."permissions/items");
+      exit;
+
+    }else{
+
+      $_SESSION['formError'] = array('name', 'slug');
+
+      header("Location: ".BASE_URL."permissions/items_add");
+      exit;
+    }
+  }
+
+  public function items_edit($id){
+
+    if(!empty($id)){
+
+      $array = array(
+        'user'=>$this->user,
+        'errorItems'=>array()
+      );
+
+      $p = new Permissions();
+      $array['permission_item'] = $p->getItem($id);
+
+      if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
+        $array['errorItems'] = $_SESSION['formError'];
+        unset($_SESSION['formError']);
+      }
+
+      $this->loadTemplate('permissions_item_edit', $array);
+
+    }else{
+
+      header("Location: ".BASE_URL."permissions/items");
+      exit;
+    }
+  }
+
+  public function edit_items_action($id){
+    if(!empty($id)){
+
+      $name = $_POST['name'];
+      $p    = new Permissions();
+      $p->editItemName($name, $id);
+
+      header("Location: ".BASE_URL."permissions/items");
+      exit;
+
+    }else{
+
+      //Observações
+      $_SESSION['formError'] = array('name');
+
+      header("Location: ".BASE_URL."permissions/items".$id);
+      exit;
+
+    }
+  }
+
+  public function items_del($id){
+
+    $p = new Permissions();
+    $p->deleteItem($id);
+    $p->deleteItemLinks($id);
+
+    header("Location: ".BASE_URL."permissions");
+    exit;
+
+  }
+
   public function add(){
     $array = array(
       'user'=>$this->user,
