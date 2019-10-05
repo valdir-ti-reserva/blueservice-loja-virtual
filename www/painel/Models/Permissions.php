@@ -5,6 +5,19 @@ use \Core\Model;
 
 class Permissions extends Model {
 
+  public function getPermissionGroupName($id_group){
+
+    $sql = "SELECT name FROM permission_groups WHERE id = :id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id", $id_group);
+    $sql->execute();
+
+    if($sql->rowCount() > 0){
+      $data = $sql->fetch();
+      return $data['name'];
+    }
+  }
+
 	public function getAllGroup() {
     $array = array();
 
@@ -81,6 +94,21 @@ class Permissions extends Model {
     $sql->execute();
 
     return $this->db->lastInsertId();
+  }
+
+  public function editName($name, $id){
+    $sql = "UPDATE permission_groups SET name = :name WHERE id= :id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":name", $name);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+  }
+
+  public function clearLinks($id){
+    $sql = "DELETE FROM permission_links WHERE id_permission_group = :id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
   }
 
   public function linkItemToGroup($id_item, $id_group){
