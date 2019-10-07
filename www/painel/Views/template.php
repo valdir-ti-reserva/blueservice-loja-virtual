@@ -92,7 +92,7 @@ desired effect
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="<?=BASE_URL?>assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="<?=BASE_URL?>assets/img-user/user-icon.png" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -177,31 +177,31 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="<?=BASE_URL?>assets/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="<?=BASE_URL?>assets/img-user/user-icon.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs"><?=$viewData['user']->getName()?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="<?=BASE_URL?>assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<?=BASE_URL?>assets/img-user/user-icon.png" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                <?=$viewData['user']->getName()?> - Web Developer
+                  <small>Member since Nov. <?=date('Y')?></small>
                 </p>
               </li>
               <!-- Menu Body -->
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+                    <a href="#">Seguidores</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
+                    <a href="#">Vendas</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
+                    <a href="#">Amigos</a>
                   </div>
                 </div>
                 <!-- /.row -->
@@ -234,10 +234,10 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=BASE_URL?>assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?=BASE_URL?>assets/img-user/user-icon.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p><?=$viewData['user']->getName()?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>

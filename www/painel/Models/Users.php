@@ -8,6 +8,8 @@ class Users extends Model {
 
   private $uid;
   private $permissions;
+  private $userName;
+  private $isAdmin;
 
 	public function isLogged() {
 
@@ -15,7 +17,7 @@ class Users extends Model {
       $token = $_SESSION['token'];
     }
 
-    $sql = "SELECT id, id_permission FROM users WHERE token=:token";
+    $sql = "SELECT id, id_permission, name, admin FROM users WHERE token=:token";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":token", $token);
     $sql->execute();
@@ -23,8 +25,10 @@ class Users extends Model {
     if($sql->rowCount() > 0){
       $p = new Permissions();
 
-      $data      = $sql->fetch();
-      $this->uid = $data['id'];
+      $data           = $sql->fetch();
+      $this->uid      = $data['id'];
+      $this->userName = $data['name'];
+      $this->isAdmin  = $data['admin'];
 
       $this->permissions = $p->getPermissions($data['id_permission']);
 
@@ -34,6 +38,18 @@ class Users extends Model {
 
     return false;
 
+  }
+
+  public function getName(){
+    return $this->userName;
+  }
+
+  public function isAdmin(){
+    if($this->isAdmin ==  '1'){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   public function hasPermission($permission_slug){

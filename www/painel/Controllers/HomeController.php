@@ -11,7 +11,6 @@ class HomeController extends Controller {
 
   public function __construct(){
 
-    //$_SESSION['token'] = NULL;
     $this->user = new Users();
 
     if(!$this->user->isLogged()){
