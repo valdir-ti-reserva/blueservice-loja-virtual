@@ -259,7 +259,8 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="http://localhost:8001/loja/"><i class="fa fa-shopping-basket"></i> <span>Ir para a loja</span></a></li>
+        <li class="<?=($viewData['menuActive'] == 'home')?'active':''?>"><a href="<?=BASE_URL?>"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a></li>
+        <li><a href="http://localhost:8001/loja/"><i class="fa fa-shopping-basket"></i> <span>Ir para a loja</span></a></li>
 
         <!-- <?php if($viewData['user']->hasPermission('permissions_view')):?>
           <li><a href="<?=BASE_URL?>permissions"><i class="fa fa-link"></i> <span>Permissões</span></a></li>
@@ -267,7 +268,7 @@ desired effect
 
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
 
-        <li class="treeview">
+        <li class="treeview <?=($viewData['menuActive'] == 'permissions')?'active':''?>">
           <a href="#"><i class="fa fa-id-badge"></i> <span>Permissões</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
