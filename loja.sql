@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 03-Out-2019 às 16:56
+-- Tempo de geração: 08-Out-2019 às 20:06
 -- Versão do servidor: 8.0.17
 -- versão do PHP: 7.2.22
 
@@ -130,10 +130,11 @@ CREATE TABLE `permission_groups` (
 --
 
 INSERT INTO `permission_groups` (`id`, `name`) VALUES
-(1, 'SuperAdministrador'),
+(1, 'Super Administrador'),
 (2, 'Administrador'),
 (3, 'Gerente'),
-(4, 'Vendedor');
+(4, 'Vendedor'),
+(8, 'New Group');
 
 -- --------------------------------------------------------
 
@@ -153,7 +154,8 @@ CREATE TABLE `permission_items` (
 
 INSERT INTO `permission_items` (`id`, `name`, `slug`) VALUES
 (1, 'Criar Cupom de Oferta', 'coupons_create'),
-(2, 'Ver Permissões', 'permissions_view');
+(2, 'Ver Permissões', 'permissions_view'),
+(3, 'Ver Categorias', 'categories_view');
 
 -- --------------------------------------------------------
 
@@ -172,10 +174,16 @@ CREATE TABLE `permission_links` (
 --
 
 INSERT INTO `permission_links` (`id`, `id_permission_group`, `id_permission_item`) VALUES
-(1, 1, 1),
 (2, 2, 1),
 (3, 3, 1),
-(4, 1, 2);
+(6, 2, 5),
+(8, 2, 6),
+(10, 2, 7),
+(11, 8, 1),
+(12, 8, 2),
+(15, 1, 1),
+(16, 1, 2),
+(17, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -357,8 +365,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `id_permission`, `email`, `password`, `name`, `admin`, `token`) VALUES
-(1, 1, 'valdir@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Valdir', 1, 'a6e309a801dd98cc076b9204bfe51760'),
-(2, 3, 'julia@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Julia', 0, '');
+(1, 1, 'valdir@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Valdir Silva', 1, '6e1631e913e3ac1c782f97cef6286420'),
+(2, 3, 'julia@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Julia Felix', 0, '');
 
 --
 -- Índices para tabelas despejadas
@@ -498,19 +506,19 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT de tabela `permission_groups`
 --
 ALTER TABLE `permission_groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `permission_items`
 --
 ALTER TABLE `permission_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `permission_links`
 --
 ALTER TABLE `permission_links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `products`

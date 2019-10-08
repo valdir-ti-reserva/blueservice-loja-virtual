@@ -26,7 +26,7 @@ try {
 }
 
 //Delimitando tempo de sessão
-$timeout = 600; // Tempo da sessao em segundos
+$timeout = 1200; // Tempo da sessao em segundos
 // Verifica se existe o parametro timeout
 if(isset($_SESSION['timeout'])) {
     // Calcula o tempo que ja se passou desde a cricao da sessao

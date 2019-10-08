@@ -281,6 +281,13 @@ desired effect
             <?php endif?>
           </ul>
         </li>
+
+        <?php if($viewData['user']->hasPermission('categories_view')):?>
+          <li class="<?=($viewData['menuActive'] == 'categories')?'active':''?>">
+            <a href="<?=BASE_URL?>categories"><i class="fa fa-usb"></i> <span>Categorias</span></a>
+          </li>
+        <?php endif?>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
