@@ -29,17 +29,10 @@
               <th width="220">Ações</th>
             </tr>
 
-            <?php foreach($list as $item):?>
-              <tr>
-                <td><?=$item['name']?></td>
-                <td>
-                  <div class="btn-group">
-                    <a href="<?=BASE_URL?>categories/edit/<?=$item['id']?>" class="btn btn-xs btn-primary">Editar</a>
-                    <a href="<?=BASE_URL?>categories/del/<?=$item['id']?>" onclick="return confirm('Deseja realmente excluir o grupo?')" class="btn btn-xs btn-danger">Excluir</a>
-                  </div>
-                </td>
-              </tr>
-            <?php endforeach?>
+            <?php $this->loadView('categories_item', array(
+              'itens'=>$list,
+              'level'=>0
+            ));?>
 
           </table>
 
