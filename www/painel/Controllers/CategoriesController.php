@@ -3,6 +3,7 @@ namespace Controllers;
 
 use \Core\Controller;
 use \Models\Users;
+use \Models\Categories;
 
 class CategoriesController extends Controller {
 
@@ -25,8 +26,9 @@ class CategoriesController extends Controller {
   }
 
 	public function index() {
+    $cat = new Categories();
 
-    $this->arrayInfo['list'] = array();
+    $this->arrayInfo['list'] = $cat->getAll();
 
 		$this->loadTemplate('categories', $this->arrayInfo);
 	}
