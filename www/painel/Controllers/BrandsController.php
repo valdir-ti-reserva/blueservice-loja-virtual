@@ -21,6 +21,11 @@ class BrandsController extends Controller {
       exit;
     }
 
+    if(!$this->user->hasPermission('brands_view')){
+      header("Location: ".BASE_URL);
+      exit;
+    }
+
     $this->arrayInfo = array(
       'user'=>$this->user,
       'menuActive'=>'brands'

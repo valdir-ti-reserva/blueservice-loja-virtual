@@ -294,6 +294,12 @@ desired effect
           </li>
         <?php endif?>
 
+        <?php if($viewData['user']->hasPermission('pages_view')):?>
+          <li class="<?=($viewData['menuActive'] == 'pages')?'active':''?>">
+            <a href="<?=BASE_URL?>pages"><i class="fa fa-window-restore"></i> <span>Páginas</span></a>
+          </li>
+        <?php endif?>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>

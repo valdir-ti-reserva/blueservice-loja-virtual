@@ -5,7 +5,7 @@ use \Core\Model;
 
 class Exemplo extends Model {
 
-	public function getAll() {
+	public function getAll():array {
 		$array = array();
 
 		return $array;

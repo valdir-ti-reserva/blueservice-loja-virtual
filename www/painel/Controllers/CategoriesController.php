@@ -21,6 +21,11 @@ class CategoriesController extends Controller {
       exit;
     }
 
+    if(!$this->user->hasPermission('categories_view')){
+      header("Location: ".BASE_URL);
+      exit;
+    }
+
     $this->arrayInfo = array(
       'user'=>$this->user,
       'menuActive'=>'categories'
