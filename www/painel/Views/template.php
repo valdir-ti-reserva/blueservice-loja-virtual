@@ -288,6 +288,12 @@ desired effect
           </li>
         <?php endif?>
 
+        <?php if($viewData['user']->hasPermission('brands_view')):?>
+          <li class="<?=($viewData['menuActive'] == 'brands')?'active':''?>">
+            <a href="<?=BASE_URL?>brands"><i class="fa fa-star-o"></i> <span>Marcas</span></a>
+          </li>
+        <?php endif?>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
