@@ -9,10 +9,12 @@ class CategoriesController extends Controller {
 
   private $user;
   private $arrayInfo;
+  private $category;
 
   public function __construct(){
 
     $this->user = new Users();
+    $this->category = new Categories();
 
     if(!$this->user->isLogged()){
       header("Location: ".BASE_URL."login");
@@ -26,11 +28,44 @@ class CategoriesController extends Controller {
   }
 
 	public function index() {
-    $cat = new Categories();
 
-    $this->arrayInfo['list'] = $cat->getAll();
+    $this->arrayInfo['list'] = $this->category->getAll();
 
 		$this->loadTemplate('categories', $this->arrayInfo);
-	}
+  }
+
+  public function add(){
+
+    $this->arrayInfo['errorItems'] = array();
+    $this->arrayInfo['list'] = $this->category->getAll();
+
+    if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
+      $this->arrayInfo['errorItems'] = $_SESSION['formError'];
+      unset($_SESSION['formError']);
+    }
+
+    $this->loadTemplate('categories_add', $this->arrayInfo);
+
+  }
+
+  public function add_action(){
+    if(!empty($_POST['name'])){
+
+      $name  = $_POST['name'];
+      $sub   = (!empty($_POST['sub']) ? $_POST['sub'] : NULL);
+      $this->category->addCategory($name, $sub);
+
+      header("Location: ".BASE_URL."categories");
+      exit;
+
+    }else{
+
+      $_SESSION['formError'] = array('name');
+
+      header("Location: ".BASE_URL."categories/add");
+      exit;
+    }
+
+  }
 
 }
