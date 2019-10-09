@@ -20,7 +20,7 @@
 					<li class="active"><a href="<?=BASE_URL; ?>">Home</a></li>
 					<!-- <li><a href="<?=BASE_URL; ?>contact">Contato</a></li> -->
 					<li><a href="http://localhost:8001/painel/">Admin</a></li>
-					<li><a href="http://localhost:8001/novo-painel/">Novo Painel</a></li>
+					<!-- <li><a href="http://localhost:8001/novo-painel/">Novo Painel</a></li> -->
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
