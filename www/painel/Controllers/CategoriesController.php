@@ -121,4 +121,19 @@ class CategoriesController extends Controller {
     }
   }
 
+  public function del($id){
+
+    if(!empty($id)){
+      $cats = $this->category->scanCategories($id);
+
+      if($this->category->hasProduct($cats) == false){
+        $this->category->deleteCategories($cats);
+      }
+
+    }
+
+    header("Location: ".BASE_URL."categories");
+    exit;
+  }
+
 }

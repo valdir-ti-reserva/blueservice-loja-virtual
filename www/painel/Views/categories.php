@@ -22,7 +22,7 @@
         </div>
         <div class="box-body">
 
-          <table class="table">
+          <table class="table table-striped">
 
             <tr>
               <th>Nome da Categoria</th>

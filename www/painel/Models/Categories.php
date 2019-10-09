@@ -84,4 +84,54 @@ class Categories extends Model {
     $sql->execute();
   }
 
+  //Ler as categorias e verificar se há sub itens na mesma
+  public function scanCategories($id, $cats = array()):array{
+
+    if(!in_array($id, $cats)){
+      $cats[] = $id;
+    }
+
+    $sql = "SELECT id FROM categories WHERE sub=:id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
+    if($sql->rowCount() > 0){
+      $data = $sql->fetchAll();
+
+      foreach($data as $item){
+        if(!in_array($item['id'], $cats)){
+          $cats[] = $item['id'];
+        }
+
+        $cats = $this->scanCategories($item['id'], $cats);
+
+      }
+    }
+
+    return $cats;
+  }
+
+
+  //Verificar se não há produtos atrelados a categoria
+  public function hasProduct($cats):bool{
+
+    $sql  = "SELECT COUNT(*) AS c FROM products WHERE id IN (".implode(',',$cats).")";
+    $sql  = $this->db->query($sql);
+
+    $data = $sql->fetch();
+
+    if(intval($data['c']) > 0){
+      return true;
+    }
+
+    return false;
+  }
+
+  //Deletando várias categorias
+  public function deleteCategories($cats){
+    $sql = "DELETE FROM categories WHERE id IN (".implode(',', $cats).")";
+    $sql = $this->db->query($sql);
+  }
+
 }
