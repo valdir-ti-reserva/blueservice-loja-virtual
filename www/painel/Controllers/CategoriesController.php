@@ -68,4 +68,57 @@ class CategoriesController extends Controller {
 
   }
 
+  public function edit($id){
+
+    if(!empty($id)){
+
+      $this->arrayInfo['errorItems'] = array();
+
+      $this->arrayInfo['list']       = $this->category->getAll();
+      $this->arrayInfo['category']   = $this->category->getCategory($id);
+      $this->arrayInfo['id']         = $id;
+
+      if(count($this->arrayInfo['category']) > 0){
+
+        if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
+          $this->arrayInfo['errorItems'] = $_SESSION['formError'];
+          unset($_SESSION['formError']);
+        }
+
+        $this->loadTemplate('categories_edit', $this->arrayInfo);
+
+      }else{
+
+        header("Location: ".BASE_URL."categories");
+        exit;
+      }
+
+    }else{
+
+
+    }
+
+  }
+
+  public function edit_action($id){
+    if(!empty($id) && !empty($_POST['name'])){
+
+      $name  = $_POST['name'];
+      $sub   = (!empty($_POST['sub']) ? $_POST['sub'] : NULL);
+      $this->category->editCategory($name, $sub, $id);
+
+      header("Location: ".BASE_URL."categories");
+      exit;
+
+    }else{
+
+      //Observações
+      $_SESSION['formError'] = array('name');
+
+      header("Location: ".BASE_URL."categories/edit/".$id);
+      exit;
+
+    }
+  }
+
 }

@@ -5,7 +5,7 @@ use \Core\Model;
 
 class Categories extends Model {
 
-	public function getAll() {
+	public function getAll():array {
     $array = array();
 
     $sql = "SELECT * FROM categories ORDER BY sub DESC";
@@ -31,7 +31,7 @@ class Categories extends Model {
 		return $array;
   }
 
-  private function stillNeed($array){
+  private function stillNeed($array):bool{
     foreach($array as $item){
       if(!empty($item['sub'])){
         return true;
@@ -58,6 +58,30 @@ class Categories extends Model {
     $sql->bindValue(":sub", $sub);
     $sql->execute();
 
+  }
+
+  public function getCategory($id):array{
+    $array = array();
+    $sql = "SELECT * FROM categories WHERE id=:id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
+    if($sql->rowCount() > 0){
+      $array = $sql->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    return $array;
+  }
+
+  public function editCategory($name, $sub, $id){
+
+    $sql = "UPDATE categories SET name=:name, sub=:sub WHERE id=:id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":name", $name);
+    $sql->bindValue(":sub", $sub);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
   }
 
 }

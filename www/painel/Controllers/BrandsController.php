@@ -80,6 +80,7 @@ class BrandsController extends Controller {
       $this->loadTemplate('brands_edit', $this->arrayInfo);
 
     }else{
+
       header("Location: ".BASE_URL."brands");
       exit;
 
