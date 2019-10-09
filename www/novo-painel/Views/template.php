@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<?=BASE_URL?>/assets/oculux/vendor/animate-css/vivify.min.css">
 <link rel="stylesheet" href="<?=BASE_URL?>/assets/oculux/vendor/c3/c3.min.css"/>
 <!-- MAIN CSS -->
-<link rel="stylesheet" href="assets/css/site.min.css">
+<link rel="stylesheet" href="<?=BASE_URL?>/assets/oculux/css/site.min.css">
 </head>
 <body class="theme-cyan font-montserrat">
 <!-- Page Loader -->
@@ -126,7 +126,7 @@
 
             <div class="navbar-left">
                 <div class="navbar-btn">
-                    <a href="index.html"><img src="<?=BASE_URL?>/assets/oculux/images/icon.svg" alt="Oculux Logo" class="img-fluid logo"></a>
+                    <a href="<?=BASE_URL?>"><img src="<?=BASE_URL?>/assets/oculux/images/icon.svg" alt="Oculux Logo" class="img-fluid logo"></a>
                     <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
                 </div>
                 <ul class="nav navbar-nav">
@@ -253,7 +253,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="javascript:void(0);" class="search_toggle icon-menu" title="Search Result"><i class="icon-magnifier"></i></a></li>
                         <li><a href="javascript:void(0);" class="right_toggle icon-menu" title="Right Menu"><i class="icon-bubbles"></i><span class="notification-dot bg-pink">2</span></a></li>
-                        <li><a href="page-login.html" class="icon-menu"><i class="icon-power"></i></a></li>
+                        <li><a href="<?=BASE_URL?>/login/logout" class="icon-menu"><i class="icon-power"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -690,7 +690,7 @@
     </div>
     <div id="left-sidebar" class="sidebar">
         <div class="navbar-brand">
-            <a href="index.html"><img src="<?=BASE_URL?>/assets/oculux/images/icon.svg" alt="Oculux Logo" class="img-fluid logo"><span>Oculux</span></a>
+            <a href="<?=BASE_URL?>"><img src="<?=BASE_URL?>/assets/oculux/images/icon.svg" alt="Oculux Logo" class="img-fluid logo"><span>Oculux</span></a>
             <button type="button" class="btn-toggle-offcanvas btn btn-sm float-right"><i class="lnr lnr-menu icon-close"></i></button>
         </div>
         <div class="sidebar-scroll">
@@ -706,7 +706,7 @@
                         <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
                         <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
                         <li class="divider"></li>
-                        <li><a href="page-login.html"><i class="icon-power"></i>Logout</a></li>
+                        <li><a href="<?=BASE_URL?>/login/logout"><i class="icon-power"></i>Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -1203,10 +1203,10 @@
     </div>
 </div>
 <!-- Javascript -->
-<script src="assets/bundles/libscripts.bundle.js"></script>
-<script src="assets/bundles/vendorscripts.bundle.js"></script>
-<script src="assets/bundles/c3.bundle.js"></script>
-<script src="assets/bundles/mainscripts.bundle.js"></script>
-<script src="assets/js/index.js"></script>
+<script src="<?=BASE_URL?>/assets/oculux/bundles/libscripts.bundle.js"></script>
+<script src="<?=BASE_URL?>/assets/oculux/bundles/vendorscripts.bundle.js"></script>
+<script src="<?=BASE_URL?>/assets/oculux/bundles/c3.bundle.js"></script>
+<script src="<?=BASE_URL?>/assets/oculux/bundles/mainscripts.bundle.js"></script>
+<script src="<?=BASE_URL?>/assets/oculux/js/index.js"></script>
 </body>
 </html>
