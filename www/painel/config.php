@@ -4,13 +4,15 @@ require 'environment.php';
 $config = array();
 if(ENVIRONMENT == 'development') {
 	define("BASE_URL", "http://localhost:8001/painel/");
+	define("BASE_URL_SITE", "http://localhost:8001/loja/");
   $host 				      = $_SERVER['REMOTE_ADDR'];
 	$config['dbname'] 	= 'loja';
 	$config['host'] 	  = $host;
 	$config['dbuser'] 	= 'root';
 	$config['dbpass'] 	= 'root';
 } else {
-	define("BASE_URL", "http://localhost/painel/");
+  define("BASE_URL", "http://localhost/painel/");
+	define("BASE_URL_SITE", "http://localhost:8001/loja/");
 	$config['dbname'] = 'loja';
 	$config['host']   = 'localhost';
 	$config['dbuser'] = 'root';

@@ -42,6 +42,13 @@ class PagesController extends Controller {
 
   public function add(){
 
+    $this->arrayInfo['errorItems'] = array();
+
+    if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
+      $this->arrayInfo['errorItems'] = $_SESSION['formError'];
+      unset($_SESSION['formError']);
+    }
+
     $this->loadTemplate('pages_add', $this->arrayInfo);
 
   }
@@ -83,6 +90,13 @@ class PagesController extends Controller {
       if(!empty($id)){
 
         $this->arrayInfo['page'] = $this->pages->getPage($id);
+
+        $this->arrayInfo['errorItems'] = array();
+
+        if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
+          $this->arrayInfo['errorItems'] = $_SESSION['formError'];
+          unset($_SESSION['formError']);
+        }
 
         if(count($this->arrayInfo['page']) > 0){
           $this->loadTemplate("pages_edit", $this->arrayInfo);
@@ -127,5 +141,27 @@ class PagesController extends Controller {
     }
   }
 
+  public function upload(){
+
+    if(!empty($_FILES['file']['tmp_name'])){
+      $types_allowed = array('image/jpeg', 'image/jpg', 'image/png');
+
+      if(in_array($_FILES['file']['type'], $types_allowed)){
+
+        $new_name = md5(time().rand(0,999).rand(0,999)).'.jpg';
+        move_uploaded_file($_FILES['file']['tmp_name'], '../loja/media/pages/'.$new_name);
+
+        $array = array(
+          'location'=>BASE_URL_SITE.'media/pages/'.$new_name
+        );
+
+        echo json_encode($array);
+        exit;
+
+      }
+
+    }
+
+  }
 
 }

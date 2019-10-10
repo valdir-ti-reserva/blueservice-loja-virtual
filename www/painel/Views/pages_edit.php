@@ -38,3 +38,19 @@
       </form>
 
 </section>
+
+<script src="https://cdn.tiny.cloud/1/07jlmfe1z337xdt19l41eq7ua2e7hat7fmtlwh8cbb3ddht3/tinymce/5/tinymce.min.js"></script>
+<script type="text/javascript">
+  tinymce.init({
+    selector:'#page_body',
+    height:500,
+    menubar:false,
+    plugins:[
+      'textcolor image media lists'
+    ],
+    toolbar: 'undo redo | formatselect | bold italic backcolor | media image | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat',
+    automatic_uploads:true,
+    files_picker_types: 'image',
+    images_upload_url: '<?=BASE_URL?>pages/upload'
+  });
+</script>

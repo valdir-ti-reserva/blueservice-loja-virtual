@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 08-Out-2019 às 20:06
+-- Tempo de geração: 10-Out-2019 às 18:49
 -- Versão do servidor: 8.0.17
 -- versão do PHP: 7.2.22
 
@@ -23,6 +23,16 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `teste_dump_docker`
+-- Caso essa tabela seja criada é sinal de que o dump foi realizado corretamente
+--
+
+CREATE TABLE `test_dump_docker` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Estrutura da tabela `brands`
@@ -66,7 +76,10 @@ INSERT INTO `categories` (`id`, `sub`, `name`) VALUES
 (4, 3, 'Com Fio'),
 (5, 3, 'Sem Fio'),
 (6, 2, 'Microfone'),
-(7, 1, 'Gamer');
+(7, 1, 'Gamer'),
+(8, NULL, 'Vídeo Game'),
+(12, 8, 'Playstation 4'),
+(13, 8, 'X-Box 360');
 
 -- --------------------------------------------------------
 
@@ -114,6 +127,15 @@ CREATE TABLE `pages` (
   `body` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `pages`
+--
+
+INSERT INTO `pages` (`id`, `title`, `body`) VALUES
+(6, 'Termo de Uso', 'Termos de uso do site'),
+(7, 'Política de Troca', '...'),
+(8, 'Política de Privacidade', '...');
+
 -- --------------------------------------------------------
 
 --
@@ -155,7 +177,9 @@ CREATE TABLE `permission_items` (
 INSERT INTO `permission_items` (`id`, `name`, `slug`) VALUES
 (1, 'Criar Cupom de Oferta', 'coupons_create'),
 (2, 'Ver Permissões', 'permissions_view'),
-(3, 'Ver Categorias', 'categories_view');
+(3, 'Ver Categorias', 'categories_view'),
+(4, 'Ver Marcas', 'brands_view'),
+(5, 'Ver páginas', 'pages_view');
 
 -- --------------------------------------------------------
 
@@ -181,9 +205,11 @@ INSERT INTO `permission_links` (`id`, `id_permission_group`, `id_permission_item
 (10, 2, 7),
 (11, 8, 1),
 (12, 8, 2),
-(15, 1, 1),
-(16, 1, 2),
-(17, 1, 3);
+(22, 1, 1),
+(23, 1, 2),
+(24, 1, 3),
+(25, 1, 4),
+(26, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -365,7 +391,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `id_permission`, `email`, `password`, `name`, `admin`, `token`) VALUES
-(1, 1, 'valdir@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Valdir Silva', 1, '6e1631e913e3ac1c782f97cef6286420'),
+(1, 1, 'valdir@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Valdir Silva', 1, 'a616a05c890812eb461253e96719736f'),
 (2, 3, 'julia@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Julia Felix', 0, '');
 
 --
@@ -476,13 +502,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `coupons`
@@ -500,7 +526,7 @@ ALTER TABLE `options`
 -- AUTO_INCREMENT de tabela `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `permission_groups`
@@ -512,13 +538,13 @@ ALTER TABLE `permission_groups`
 -- AUTO_INCREMENT de tabela `permission_items`
 --
 ALTER TABLE `permission_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `permission_links`
 --
 ALTER TABLE `permission_links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `products`
