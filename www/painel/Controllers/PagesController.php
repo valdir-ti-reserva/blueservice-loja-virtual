@@ -79,4 +79,53 @@ class PagesController extends Controller {
     exit;
   }
 
+  public function edit($id){
+      if(!empty($id)){
+
+        $this->arrayInfo['page'] = $this->pages->getPage($id);
+
+        if(count($this->arrayInfo['page']) > 0){
+          $this->loadTemplate("pages_edit", $this->arrayInfo);
+        }else{
+          header("Location: ".BASE_URL."pages");
+          exit;
+        }
+
+      }else{
+
+        header("Location: ".BASE_URL."pages");
+        exit;
+      }
+  }
+
+  public function edit_action($id){
+    if(!empty($id)){
+
+      if(!empty($_POST['title'])){
+
+        $title = $_POST['title'];
+        $body = $_POST['body'];
+
+        $this->pages->edit($id, $title, $body);
+
+        header("Location: ".BASE_URL."pages");
+        exit;
+
+      }else{
+
+        $_SESSION['formError'] = array('title');
+
+        header("Location: ".BASE_URL."pages/edit/".$id);
+        exit;
+      }
+
+    }else{
+
+      header("Location: ".BASE_URL."pages");
+      exit;
+
+    }
+  }
+
+
 }

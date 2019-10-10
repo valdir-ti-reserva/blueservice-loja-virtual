@@ -11,11 +11,11 @@
       | Your Page Content Here   |
       --------------------------->
 
-      <form action="<?=BASE_URL?>pages/add_action" method="POST">
+      <form action="<?=BASE_URL?>pages/edit_action/<?=$page['id']?>" method="POST">
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Nova Página</h3>
+            <h3 class="box-title">Editar Página</h3>
             <div class="box-tools">
               <input type="submit" class="btn btn-success" value="Salvar">
             </div>
@@ -24,12 +24,12 @@
 
             <div class="form-group <?= (in_array('title', $errorItems))?'has-error':'' ?>">
               <label for="page_title">Nome da Página</label>
-              <input type="text" class="form-control" id="page_title" name="title" autocomplete="off"/>
+              <input type="text" class="form-control" id="page_title" name="title" autocomplete="off" value="<?=$page['title']?>"/>
             </div>
 
             <div class="form-group <?= (in_array('body', $errorItems))?'has-error':'' ?>">
               <label for="page_body">Corpo da Página</label>
-              <textarea name="body" id="page_body" cols="30" rows="10"></textarea>
+              <textarea name="body" id="page_body" cols="30" rows="10"><?=$page['body']?></textarea>
             </div>
 
           </div>
