@@ -149,10 +149,14 @@ class PagesController extends Controller {
       if(in_array($_FILES['file']['type'], $types_allowed)){
 
         $new_name = md5(time().rand(0,999).rand(0,999)).'.jpg';
-        move_uploaded_file($_FILES['file']['tmp_name'], '../loja/media/pages/'.$new_name);
+        $path = '../loja/media/pages/'.$new_name;
+
+        move_uploaded_file($_FILES['file']['tmp_name'], $path);
+
+        $path_save = BASE_URL_SITE.'media/pages/'.$new_name;
 
         $array = array(
-          'location'=>BASE_URL_SITE.'media/pages/'.$new_name
+          'location'=>$path_save
         );
 
         echo json_encode($array);
