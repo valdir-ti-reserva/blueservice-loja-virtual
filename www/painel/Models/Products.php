@@ -11,7 +11,7 @@ class Products extends Model {
 	public function getAll():array {
     $array = array();
 
-    $sql = "SELECT id_category, id_brand, name, stock, price_from, price FROM products";
+    $sql = "SELECT id, id_category, id_brand, name, stock, price_from, price FROM products";
     $sql = $this->db->query($sql);
 
     if($sql->rowCount() > 0){

@@ -39,23 +39,25 @@ class ProductsController extends Controller {
   }
 
 	public function index() {
-    $this->arrayInfo['list'] = $this->product->getAll();
 
+    $this->arrayInfo['list'] = $this->product->getAll();
 		$this->loadTemplate('products', $this->arrayInfo);
   }
 
-  // public function add(){
+  public function add(){
+    
+    $this->arrayInfo['cat_list']   = $this->category->getAll();
+    $this->arrayInfo['brand_list'] = $this->brand->getAll();
+    $this->arrayInfo['errorItems']  = array();
 
-  //   $this->arrayInfo['errorItems'] = array();
+    if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
+      $this->arrayInfo['errorItems'] = $_SESSION['formError'];
+      unset($_SESSION['formError']);
+    }
 
-  //   if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
-  //     $this->arrayInfo['errorItems'] = $_SESSION['formError'];
-  //     unset($_SESSION['formError']);
-  //   }
+    $this->loadTemplate('products_add', $this->arrayInfo);
 
-  //   $this->loadTemplate('brands_add', $this->arrayInfo);
-
-  // }
+  }
 
   // public function add_action(){
   //   if(!empty($_POST['name'])){
