@@ -300,6 +300,12 @@ desired effect
           </li>
         <?php endif?>
 
+        <?php if($viewData['user']->hasPermission('products_view')):?>
+          <li class="<?=($viewData['menuActive'] == 'products')?'active':''?>">
+            <a href="<?=BASE_URL?>products"><i class="fa fa-database"></i> <span>Produtos</span></a>
+          </li>
+        <?php endif?>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
