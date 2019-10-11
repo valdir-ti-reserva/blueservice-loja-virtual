@@ -34,7 +34,7 @@ class ProductsController extends Controller {
 
     $this->arrayInfo = array(
       'user'=>$this->user,
-      'menuActive'=>'brands'
+      'menuActive'=>'products'
     );
   }
 
