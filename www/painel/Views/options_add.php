@@ -1,6 +1,6 @@
 <section class="content-header">
       <h1>
-        Opções
+        Opções do Produto
       </h1>
     </section>
 

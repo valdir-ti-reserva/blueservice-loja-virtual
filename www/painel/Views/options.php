@@ -1,6 +1,6 @@
 <section class="content-header">
   <h1>
-    Opções
+    Opções do Produto
   </h1>
 </section>
 
@@ -29,14 +29,14 @@
           <th width="220">Ações</th>
         </tr>
 
-        <?php foreach($list as $item):?>
+        <?php foreach($list as $item):?>         
           <tr>
             <td><?=$item['name'];?>
             </td>
             <td>
               <div class="btn-group">
                 <a href="<?=BASE_URL?>options/edit/<?=$item['id']?>" class="btn btn-xs btn-primary">Editar</a>
-                <a href="<?=BASE_URL?>options/del/<?=$item['id']?>" onclick="return confirm('Deseja realmente excluir essa opção?')" class="btn btn-xs btn-danger">Excluir</a>
+                <a href="<?=BASE_URL?>options/del/<?=$item['id']?>" onclick="return confirm('Deseja realmente excluir essa opção?')" class="btn btn-xs btn-danger <?php echo($item['product_count']!=0?'disabled':'');?>"">Excluir</a>
               </div>
             </td>
           </tr>

@@ -15,7 +15,7 @@
         <h3 class="box-title">Produtos</h3>
         <div class="box-tools">
 
-          <a href="<?=BASE_URL?>options" class="btn btn-primary">Opções</a>
+          <a href="<?=BASE_URL?>options" class="btn btn-primary">Opções do Produto</a>
           <a href="<?=BASE_URL?>products/add" class="btn btn-success">Adicionar</a>
 
         </div>

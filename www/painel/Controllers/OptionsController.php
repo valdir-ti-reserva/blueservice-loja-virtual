@@ -34,8 +34,7 @@ class OptionsController extends Controller {
 
 	public function index() {
 
-    $this->arrayInfo['list'] = $this->option->getAll();
-
+    $this->arrayInfo['list'] = $this->option->getAll($checkHasProduct = true);
 		$this->loadTemplate('options', $this->arrayInfo);
   }
 
