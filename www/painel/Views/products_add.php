@@ -26,7 +26,7 @@
               <label for="p_cat">Categoria</label>
               <select name="id_category" id="p_cat" class="form-control">
                 <option value="0">Selecione a Categoria</option>
-                  
+
                   <?php $this->loadView('categories_select', array(
                     'itens'=>$cat_list,
                     'level'=>0
@@ -64,7 +64,7 @@
               <label for="p_price_from">Preço (de)</label>
               <input type="text" class="form-control" id="p_price_from" name="price_from" autocomplete="off"/>
             </div>
-            
+
             <div class="form-group <?= (in_array('price', $errorItems))?'has-error':'' ?>">
               <label for="p_price">Preço (por)</label>
               <input type="text" class="form-control" id="p_price" name="price" autocomplete="off"/>
@@ -95,7 +95,7 @@
             <div class="form-group <?= (in_array('diameter', $errorItems))?'has-error':'' ?>">
               <label for="p_diameter">Diametro (em CM)</label>
               <input type="text" class="form-control" id="p_diameter" name="diameter" autocomplete="off"/>
-            </div>            
+            </div>
 
             <hr>
 
@@ -117,6 +117,25 @@
             <div class="form-group <?= (in_array('new_product', $errorItems))?'has-error':'' ?>">
               <label for="p_new_product">Novo Produto</label><br>
               <input type="checkbox" id="p_new_product" name="new_product"/>
+            </div>
+
+            <hr>
+
+            <?php foreach($option_list as $optionItem):?>
+              <div class="form-group">
+                <label for="p_option_<?=$optionItem['id']?>"><?=$optionItem['name']?></label>
+                <input type="text" name="options[<?=$optionItem['id']?>]" id="p_option_<?=$optionItem['id']?>" value="" class="form-control">
+              </div>
+            <?php endforeach?>
+
+            <hr>
+
+            <label for="">Imagens do Produto</label><br>
+
+            <button class="p_new_image btn btn-primary">+</button>
+
+            <div class="products_files_area">
+              <input type="file" name="images[]" style='margin-bottom:5px;'/>
             </div>
 
           </div>

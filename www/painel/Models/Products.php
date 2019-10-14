@@ -71,12 +71,31 @@ class Products extends Model {
     $sql->bindValue(":bestseller", $product['bestseller']);
     $sql->bindValue(":new_product", $product['new_product']);
     $sql->execute();
+
+    $id_inserido = $this->db->lastInsertId();
+    $this->addOptions($id_inserido, $product['options']);
+
+  }
+
+  public function addOptions($id, $options){
+
+    foreach($options as $k=>$opt){
+
+      $sql = "INSERT INTO products_options SET id_product=:id_product, id_option=:id_option, p_value=:p_value";
+      $sql = $this->db->prepare($sql);
+      $sql->bindValue(":id_product", $id);
+      $sql->bindValue(":id_option", $k);
+      $sql->bindValue(":p_value", $opt);
+      $sql->execute();
+    }
   }
 
   public function getProduct($id):array{
 
     $array = array();
-    $sql = "SELECT * FROM products WHERE id=:id";
+    $sql = "SELECT * FROM products
+
+    WHERE id=:id";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":id", $id);
     $sql->execute();

@@ -6,6 +6,7 @@ use \Models\Users;
 use \Models\Brands;
 use \Models\Products;
 use \Models\Categories;
+use \Models\Options;
 
 class ProductsController extends Controller {
 
@@ -14,6 +15,7 @@ class ProductsController extends Controller {
   private $brand;
   private $product;
   private $category;
+  private $option;
 
   public function __construct(){
 
@@ -21,6 +23,7 @@ class ProductsController extends Controller {
     $this->brand    = new Brands();
     $this->product  = new Products();
     $this->category = new Categories();
+    $this->option   = new Options();
 
     if(!$this->user->isLogged()){
       header("Location: ".BASE_URL."login");
@@ -48,6 +51,7 @@ class ProductsController extends Controller {
 
     $this->arrayInfo['cat_list']   = $this->category->getAll();
     $this->arrayInfo['brand_list'] = $this->brand->getAll();
+    $this->arrayInfo['option_list'] = $this->option->getAll();
     $this->arrayInfo['errorItems']  = array();
 
     if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
@@ -60,11 +64,14 @@ class ProductsController extends Controller {
   }
 
   public function add_action(){
+
+
+
     if(!empty($_POST['name']) &&
-        !empty($_POST['id_category']) &&
-          !empty($_POST['id_brand']) &&
-            !empty($_POST['description'])
-      ){
+    !empty($_POST['id_category']) &&
+    !empty($_POST['id_brand']) &&
+    !empty($_POST['description'])
+    ){
 
       $product = array();
       $product['name']        = $_POST['name'];
@@ -83,6 +90,7 @@ class ProductsController extends Controller {
       $product['sale']        = (isset($_POST['sale']) ? 1 : 0);
       $product['bestseller']  = (isset($_POST['bestseller']) ? 1 : 0);
       $product['new_product'] = (isset($_POST['new_product']) ? 1 : 0);
+      $product['options']     = $_POST['options'];
 
       $this->product->addProduct($product);
 
@@ -102,8 +110,11 @@ class ProductsController extends Controller {
 
     if(!empty($id)){
 
-      $this->arrayInfo['cat_list']   = $this->category->getAll();
-      $this->arrayInfo['brand_list'] = $this->brand->getAll();
+      $this->arrayInfo['cat_list']       = $this->category->getAll();
+      $this->arrayInfo['brand_list']     = $this->brand->getAll();
+      $this->arrayInfo['option_list']    = $this->option->getAll();
+      $this->arrayInfo['option_product'] = $this->option->getOptionProduct($id);
+
       $this->arrayInfo['errorItems'] = array();
 
       $this->arrayInfo['product'] = $this->product->getProduct($id);

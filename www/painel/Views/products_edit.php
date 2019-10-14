@@ -120,6 +120,29 @@
               <input type="checkbox" id="p_new_product" name="new_product" <?=($product['new_product'] == 1 ? 'checked' : '')?>/>
             </div>
 
+            <hr>
+
+            <?php foreach($option_list as $optionItem):?>
+              <div class="form-group">
+                <label for="p_option_<?=$optionItem['id']?>"><?=$optionItem['name']?></label>
+                <input type="text" name="options[<?=$optionItem['id']?>]" id="p_option_<?=$optionItem['id']?>" class="form-control">
+              </div>
+            <?php endforeach?>
+
+            <hr>
+
+            <pre>
+                  <?php print_r($product)?>
+            </pre>
+
+            <label for="">Imagens do Produto</label><br>
+
+            <button class="p_new_image btn btn-primary">+</button>
+
+            <div class="products_files_area">
+              <input type="file" name="images[]" style='margin-bottom:5px;'/>
+            </div>
+
           </div>
         </div>
 
