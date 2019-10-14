@@ -45,7 +45,7 @@ class ProductsController extends Controller {
   }
 
   public function add(){
-    
+
     $this->arrayInfo['cat_list']   = $this->category->getAll();
     $this->arrayInfo['brand_list'] = $this->brand->getAll();
     $this->arrayInfo['errorItems']  = array();
@@ -59,75 +59,122 @@ class ProductsController extends Controller {
 
   }
 
-  // public function add_action(){
-  //   if(!empty($_POST['name'])){
+  public function add_action(){
+    if(!empty($_POST['name']) &&
+        !empty($_POST['id_category']) &&
+          !empty($_POST['id_brand']) &&
+            !empty($_POST['description'])
+      ){
 
-  //     $name  = $_POST['name'];
-  //     $this->brand->addBrand($name);
+      $product = array();
+      $product['name']        = $_POST['name'];
+      $product['id_brand']    = $_POST['id_brand'];
+      $product['id_category'] = $_POST['id_category'];
+      $product['description'] = $_POST['description'];
+      $product['stock']       = (!empty($_POST['stock']) ? $_POST['stock'] : 0);
+      $product['price_from']  = (!empty($_POST['price_from']) ? $_POST['price_from'] : 0);
+      $product['price']       = (!empty($_POST['price']) ? $_POST['price'] : 0);
+      $product['weight']      = (!empty($_POST['weight']) ? $_POST['weight'] : 0);
+      $product['width']       = (!empty($_POST['width']) ? $_POST['width'] : 0);
+      $product['height']      = (!empty($_POST['height']) ? $_POST['height'] : 0);
+      $product['length']      = (!empty($_POST['length']) ? $_POST['length'] : 0);
+      $product['diameter']    = (!empty($_POST['diameter']) ? $_POST['diameter'] : 0);
+      $product['featured']    = (isset($_POST['featured']) ? 1 : 0);
+      $product['sale']        = (isset($_POST['sale']) ? 1 : 0);
+      $product['bestseller']  = (isset($_POST['bestseller']) ? 1 : 0);
+      $product['new_product'] = (isset($_POST['new_product']) ? 1 : 0);
 
-  //     header("Location: ".BASE_URL."brands");
-  //     exit;
+      $this->product->addProduct($product);
 
-  //   }else{
+      header("Location: ".BASE_URL."products");
+      exit;
 
-  //     $_SESSION['formError'] = array('name');
+    }else{
 
-  //     header("Location: ".BASE_URL."brands/add");
-  //     exit;
-  //   }
-  // }
+      $_SESSION['formError'] = array('name', 'id_category', 'id_brand', 'description');
 
-  // public function edit($id){
+      header("Location: ".BASE_URL."products/add");
+      exit;
+    }
+  }
 
-  //   if(!empty($id)){
-  //     $this->arrayInfo['errorItems'] = array();
+  public function edit($id){
 
-  //     $this->arrayInfo['brand'] = $this->brand->getBrand($id);
+    if(!empty($id)){
 
-  //     if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
-  //       $this->arrayInfo['errorItems'] = $_SESSION['formError'];
-  //       unset($_SESSION['formError']);
-  //     }
+      $this->arrayInfo['cat_list']   = $this->category->getAll();
+      $this->arrayInfo['brand_list'] = $this->brand->getAll();
+      $this->arrayInfo['errorItems'] = array();
 
-  //     $this->loadTemplate('brands_edit', $this->arrayInfo);
+      $this->arrayInfo['product'] = $this->product->getProduct($id);
 
-  //   }else{
+      if(isset($_SESSION['formError']) && count($_SESSION['formError']) > 0){
+        $this->arrayInfo['errorItems'] = $_SESSION['formError'];
+        unset($_SESSION['formError']);
+      }
 
-  //     header("Location: ".BASE_URL."brands");
-  //     exit;
+      $this->loadTemplate('products_edit', $this->arrayInfo);
 
-  //   }
-  // }
+    }else{
 
-  // public function edit_action($id){
-  //   if(!empty($id) && !empty($_POST['name'])){
+      header("Location: ".BASE_URL."products");
+      exit;
 
-  //     $name  = $_POST['name'];
-  //     $this->brand->editName($name, $id);
+    }
+  }
 
-  //     header("Location: ".BASE_URL."brands");
-  //     exit;
+  public function edit_action($id){
 
-  //   }else{
+    if(!empty($id) &&
+        !empty($_POST['name']) &&
+          !empty($_POST['id_category']) &&
+            !empty($_POST['id_brand']) &&
+              !empty($_POST['description'])
+      ){
 
-  //     //Observações
-  //     $_SESSION['formError'] = array('name');
+      $product = array();
+      $product['id']          = $id;
+      $product['name']        = $_POST['name'];
+      $product['id_brand']    = $_POST['id_brand'];
+      $product['id_category'] = $_POST['id_category'];
+      $product['description'] = $_POST['description'];
+      $product['stock']       = (!empty($_POST['stock']) ? $_POST['stock'] : 0);
+      $product['price_from']  = (!empty($_POST['price_from']) ? $_POST['price_from'] : 0);
+      $product['price']       = (!empty($_POST['price']) ? $_POST['price'] : 0);
+      $product['weight']      = (!empty($_POST['weight']) ? $_POST['weight'] : 0);
+      $product['width']       = (!empty($_POST['width']) ? $_POST['width'] : 0);
+      $product['height']      = (!empty($_POST['height']) ? $_POST['height'] : 0);
+      $product['length']      = (!empty($_POST['length']) ? $_POST['length'] : 0);
+      $product['diameter']    = (!empty($_POST['diameter']) ? $_POST['diameter'] : 0);
+      $product['featured']    = (isset($_POST['featured']) ? 1 : 0);
+      $product['sale']        = (isset($_POST['sale']) ? 1 : 0);
+      $product['bestseller']  = (isset($_POST['bestseller']) ? 1 : 0);
+      $product['new_product'] = (isset($_POST['new_product']) ? 1 : 0);
 
-  //     header("Location: ".BASE_URL."brands/edit/".$id);
-  //     exit;
+      $this->product->editProduct($product, $id);
 
-  //   }
-  // }
+      header("Location: ".BASE_URL."products");
+      exit;
 
-  // public function del($id){
+    }else{
 
-  //   if(!empty($id)){
-  //     $this->brand->delete($id);
-  //   }
+      $_SESSION['formError'] = array('name', 'id_category', 'id_brand', 'description');
 
-  //   header("Location: ".BASE_URL."brands");
-  //   exit;
+      header("Location: ".BASE_URL."products/edit/".$id);
+      exit;
 
-  // }
+    }
+  }
+
+  public function del($id){
+
+    if(!empty($id)){
+      $this->product->delete($id);
+    }
+
+    header("Location: ".BASE_URL."products");
+    exit;
+
+  }
 
 }

@@ -31,48 +31,113 @@ class Products extends Model {
 		return $array;
   }
 
-  // public function addBrand($name){
+  public function addProduct($product = array()):void{
 
-  //   $sql = "INSERT INTO brands SET name=:name";
-  //   $sql = $this->db->prepare($sql);
-  //   $sql->bindValue(":name", $name);
-  //   $sql->execute();
+    $sql = "INSERT INTO products
+              SET
+                name=:name,
+                id_brand=:id_brand,
+                id_category=:id_category,
+                description=:description,
+                stock=:stock,
+                price_from=:price_from,
+                price=:price,
+                weight=:weight,
+                width=:width,
+                height=:height,
+                length=:length,
+                diameter=:diameter,
+                featured=:featured,
+                sale=:sale,
+                bestseller=:bestseller,
+                new_product=:new_product
+            ";
 
-  // }
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":name", $product['name']);
+    $sql->bindValue(":id_brand", $product['id_brand']);
+    $sql->bindValue(":id_category", $product['id_category']);
+    $sql->bindValue(":description", $product['description']);
+    $sql->bindValue(":stock", $product['stock']);
+    $sql->bindValue(":price_from", $product['price_from']);
+    $sql->bindValue(":price", $product['price']);
+    $sql->bindValue(":weight", $product['weight']);
+    $sql->bindValue(":width", $product['width']);
+    $sql->bindValue(":height", $product['height']);
+    $sql->bindValue(":length", $product['length']);
+    $sql->bindValue(":diameter", $product['diameter']);
+    $sql->bindValue(":featured", $product['featured']);
+    $sql->bindValue(":sale", $product['sale']);
+    $sql->bindValue(":bestseller", $product['bestseller']);
+    $sql->bindValue(":new_product", $product['new_product']);
+    $sql->execute();
+  }
 
-  // public function getBrand($id):array{
+  public function getProduct($id):array{
 
-  //   $array = array();
-  //   $sql = "SELECT * FROM brands WHERE id=:id";
-  //   $sql = $this->db->prepare($sql);
-  //   $sql->bindValue(":id", $id);
-  //   $sql->execute();
+    $array = array();
+    $sql = "SELECT * FROM products WHERE id=:id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
 
-  //   if($sql->rowCount() > 0){
-  //     $array = $sql->fetch(\PDO::FETCH_ASSOC);
-  //   }
+    if($sql->rowCount() > 0){
+      $array = $sql->fetch(\PDO::FETCH_ASSOC);
+    }
 
-  //   return $array;
+    return $array;
+  }
 
-  // }
+  public function editProduct($product, $id):void{
 
-  // public function editName($name, $id){
+    $sql = "UPDATE products SET
+                name=:name,
+                id_brand=:id_brand,
+                id_category=:id_category,
+                description=:description,
+                stock=:stock,
+                price_from=:price_from,
+                price=:price,
+                weight=:weight,
+                width=:width,
+                height=:height,
+                length=:length,
+                diameter=:diameter,
+                featured=:featured,
+                sale=:sale,
+                bestseller=:bestseller,
+                new_product=:new_product
+            WHERE id=:id";
 
-  //   $sql = "UPDATE brands SET name=:name WHERE id=:id";
-  //   $sql = $this->db->prepare($sql);
-  //   $sql->bindValue(":id",$id);
-  //   $sql->bindValue(":name",$name);
-  //   $sql->execute();
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id",$id);
+    $sql->bindValue(":name", $product['name']);
+    $sql->bindValue(":id_brand", $product['id_brand']);
+    $sql->bindValue(":id_category", $product['id_category']);
+    $sql->bindValue(":description", $product['description']);
+    $sql->bindValue(":stock", $product['stock']);
+    $sql->bindValue(":price_from", $product['price_from']);
+    $sql->bindValue(":price", $product['price']);
+    $sql->bindValue(":weight", $product['weight']);
+    $sql->bindValue(":width", $product['width']);
+    $sql->bindValue(":height", $product['height']);
+    $sql->bindValue(":length", $product['length']);
+    $sql->bindValue(":diameter", $product['diameter']);
+    $sql->bindValue(":featured", $product['featured']);
+    $sql->bindValue(":sale", $product['sale']);
+    $sql->bindValue(":bestseller", $product['bestseller']);
+    $sql->bindValue(":new_product", $product['new_product']);
+    $sql->execute();
 
-  // }
+  }
 
-  // public function delete($id){
+  public function delete($id){
 
-  //   $sql = "DELETE FROM brands WHERE id=:id";
-  //   $sql = $this->db->prepare($sql);
-  //   $sql->bindValue(":id", $id);
-  //   $sql->execute();
+    $sql = "DELETE FROM products WHERE id=:id";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
 
-  // }
+  }
 
 }
