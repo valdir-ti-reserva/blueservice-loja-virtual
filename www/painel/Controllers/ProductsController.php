@@ -65,8 +65,6 @@ class ProductsController extends Controller {
 
   public function add_action(){
 
-
-
     if(!empty($_POST['name']) &&
     !empty($_POST['id_category']) &&
     !empty($_POST['id_brand']) &&

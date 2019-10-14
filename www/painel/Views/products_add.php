@@ -24,8 +24,8 @@
 
             <div class="form-group <?= (in_array('id_category', $errorItems))?'has-error':'' ?>">
               <label for="p_cat">Categoria</label>
-              <select name="id_category" id="p_cat" class="form-control">
-                <option value="0">Selecione a Categoria</option>
+              <select required="required" name="id_category" id="p_cat" class="form-control">
+                <option value="">Selecione a Categoria</option>
 
                   <?php $this->loadView('categories_select', array(
                     'itens'=>$cat_list,
@@ -37,8 +37,8 @@
 
             <div class="form-group <?= (in_array('id_brand', $errorItems))?'has-error':'' ?>">
               <label for="p_brand">Marca</label>
-              <select name="id_brand" id="p_brand" class="form-control">
-                <option value="0">Selecione a Marca</option>
+              <select required="required" name="id_brand" id="p_brand" class="form-control">
+                <option value="">Selecione a Marca</option>
                 <?php foreach($brand_list as $b):?>
                   <option value="<?=$b['id']?>"><?=$b['name']?></option>
                 <?php endforeach?>
@@ -47,7 +47,7 @@
 
             <div class="form-group <?= (in_array('name', $errorItems))?'has-error':'' ?>">
               <label for="p_name">Nome do Produto</label>
-              <input type="text" class="form-control" id="p_name" name="name" autocomplete="off"/>
+              <input required type="text" class="form-control" id="p_name" name="name" autocomplete="off"/>
             </div>
 
             <div class="form-group <?= (in_array('description', $errorItems))?'has-error':'' ?>">
@@ -57,7 +57,7 @@
 
             <div class="form-group <?= (in_array('stock', $errorItems))?'has-error':'' ?>">
               <label for="p_stock">Estoque Disponível</label>
-              <input type="number" class="form-control" id="p_stock" name="stock" autocomplete="off"/>
+              <input required type="number" class="form-control" id="p_stock" name="stock" autocomplete="off"/>
             </div>
 
             <div class="form-group <?= (in_array('price_from', $errorItems))?'has-error':'' ?>">
@@ -67,7 +67,7 @@
 
             <div class="form-group <?= (in_array('price', $errorItems))?'has-error':'' ?>">
               <label for="p_price">Preço (por)</label>
-              <input type="text" class="form-control" id="p_price" name="price" autocomplete="off"/>
+              <input required type="text" class="form-control" id="p_price" name="price" autocomplete="off"/>
             </div>
 
             <hr>
