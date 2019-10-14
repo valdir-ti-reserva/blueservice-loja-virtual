@@ -113,7 +113,6 @@ class ProductsController extends Controller {
       $this->arrayInfo['cat_list']       = $this->category->getAll();
       $this->arrayInfo['brand_list']     = $this->brand->getAll();
       $this->arrayInfo['option_list']    = $this->option->getAll();
-      $this->arrayInfo['option_product'] = $this->option->getOptionProduct($id);
 
       $this->arrayInfo['errorItems'] = array();
 

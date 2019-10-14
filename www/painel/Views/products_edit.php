@@ -131,10 +131,6 @@
 
             <hr>
 
-            <pre>
-                  <?php print_r($product)?>
-            </pre>
-
             <label for="">Imagens do Produto</label><br>
 
             <button class="p_new_image btn btn-primary">+</button>
