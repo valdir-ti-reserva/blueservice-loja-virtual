@@ -28,10 +28,7 @@ class Options extends Model {
 
   public function addOption($name){
 
-    $sql = "INSERT INTO options SET name=:name";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":name", $name);
-    $sql->execute();
+    $this->simpleInsert('options', 'name', $name);
 
   }
 

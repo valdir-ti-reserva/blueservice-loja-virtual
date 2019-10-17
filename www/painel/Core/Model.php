@@ -74,4 +74,12 @@ class Model {
     $sql->execute();
   }
 
+  //To Insert a simple field
+  public function simpleInsert($table, $field, $value):void{
+    $sql = "INSERT INTO ".$table." SET ".$field."=:".$field."";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":".$field, $value);
+    $sql->execute();
+  }
+
 }

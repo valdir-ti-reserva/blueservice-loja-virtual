@@ -12,10 +12,7 @@ class Brands extends Model {
 
   public function addBrand($name){
 
-    $sql = "INSERT INTO brands SET name=:name";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":name", $name);
-    $sql->execute();
+    $this->simpleInsert('brands', 'name', $name);
 
   }
 
