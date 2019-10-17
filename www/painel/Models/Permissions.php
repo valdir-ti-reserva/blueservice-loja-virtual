@@ -49,15 +49,9 @@ class Permissions extends Model {
   }
 
   public function getItem($id){
-    $sql = "SELECT * FROM permission_items WHERE id = :id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
 
-    if($sql->rowCount() > 0){
-      $data = $sql->fetch(\PDO::FETCH_ASSOC);
-      return $data;
-    }
+    return $this->simpleGetId('permission_items', '*', array('id'=>$id));
+
   }
 
   public function editItemName($name, $id){

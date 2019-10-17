@@ -61,17 +61,9 @@ class Categories extends Model {
   }
 
   public function getCategory($id):array{
-    $array = array();
-    $sql = "SELECT * FROM categories WHERE id=:id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
 
-    if($sql->rowCount() > 0){
-      $array = $sql->fetch(\PDO::FETCH_ASSOC);
-    }
+    return $this->simpleGetId('categories', '*', array('id'=>$id));
 
-    return $array;
   }
 
   public function editCategory($name, $sub, $id){

@@ -6,17 +6,8 @@ use \Core\Model;
 
 class Brands extends Model {
 
-	public function getAll():array {
-    $array = array();
-
-    $sql = "SELECT * FROM brands";
-    $sql = $this->db->query($sql);
-
-    if($sql->rowCount() > 0){
-      $array = $sql->fetchAll(\PDO::FETCH_ASSOC);
-    }
-
-		return $array;
+  public function getAll(){
+    return $this->simpleSelect('brands');
   }
 
   public function addBrand($name){
@@ -30,18 +21,7 @@ class Brands extends Model {
 
   public function getBrand($id):array{
 
-    $array = array();
-    $sql = "SELECT * FROM brands WHERE id=:id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
-
-    if($sql->rowCount() > 0){
-      $array = $sql->fetch(\PDO::FETCH_ASSOC);
-    }
-
-    return $array;
-
+    return $this->simpleGetId('brands', '*', array('id'=>$id));
   }
 
   public function editName($name, $id){
@@ -62,13 +42,12 @@ class Brands extends Model {
     $sql->execute();
     $data = $sql->fetch();
 
-    if($data['c'] == '0'){      
+    if($data['c'] == '0'){
       $sql = "DELETE FROM brands WHERE id=:id";
       $sql = $this->db->prepare($sql);
       $sql->bindValue(":id", $id);
       $sql->execute();
     }
-
 
   }
 

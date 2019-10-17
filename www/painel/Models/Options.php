@@ -10,8 +10,8 @@ class Options extends Model {
     $array = array();
 
     if($checkHasProduct){
-      $sql = "SELECT *, 
-                (select count(*) from products_options where products_options.id = options.id) as product_count 
+      $sql = "SELECT *,
+                (select count(*) from products_options where products_options.id = options.id) as product_count
                   FROM options";
     }else{
       $sql = "SELECT * FROM options";
@@ -37,17 +37,7 @@ class Options extends Model {
 
   public function getOption($id):array{
 
-    $array = array();
-    $sql = "SELECT * FROM options WHERE id=:id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
-
-    if($sql->rowCount() > 0){
-      $array = $sql->fetch(\PDO::FETCH_ASSOC);
-    }
-
-    return $array;
+    return $this->simpleGetId('options', '*', array('id'=>$id));
 
   }
 

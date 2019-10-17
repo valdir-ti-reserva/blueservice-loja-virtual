@@ -6,30 +6,13 @@ use \Core\Model;
 class Pages extends Model {
 
 	public function getAll():array {
-    $array = array();
-
-    $sql = "SELECT id, title FROM pages";
-    $sql = $this->db->query($sql);
-
-    if($sql->rowCount() > 0 ){
-      $array = $sql->fetchAll(\PDO::FETCH_ASSOC);
-    }
-
-		return $array;
+    return $this->simpleSelectFields('pages', ['id', 'title']);
   }
 
   public function getPage($id):array{
-    $array = array();
-    $sql = "SELECT * FROM pages WHERE id=:id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
 
-    if($sql->rowCount() > 0){
-      $array = $sql->fetch(\PDO::FETCH_ASSOC);
-    }
+    return $this->simpleGetId('pages', '*', array('id'=>$id));
 
-    return $array;
   }
 
   public function add($title, $body){
