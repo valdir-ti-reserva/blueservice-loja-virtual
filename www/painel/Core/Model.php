@@ -50,6 +50,16 @@ class Model {
     return $array;
   }
 
+  public function selectCount($table, $field, $fieldBind, $value){
+    $sql = "SELECT count(*) as c FROM ".$table." WHERE ".$field." = :".$fieldBind."";
+    $sql = $this->db->prepare($sql);
+    $sql->bindValue(":".$fieldBind, $value);
+    $sql->execute();
+    $data = $sql->fetch();
+    return $data['c'];
+  }
+
+
   public function deleteByID($table, $id):void{
     $sql = "DELETE FROM ".$table." WHERE id=:id";
     $sql = $this->db->prepare($sql);

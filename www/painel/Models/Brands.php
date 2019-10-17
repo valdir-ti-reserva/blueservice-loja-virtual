@@ -36,13 +36,9 @@ class Brands extends Model {
 
   public function delete($id){
 
-    $sql = "SELECT count(*) as c FROM products WHERE id_brand = :id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
-    $data = $sql->fetch();
+    $data = $this->selectCount('products', 'id_brand', 'id', $id);
 
-    if($data['c'] == '0'){
+    if($data == '0'){
       $this->deleteByID('brands', $id);
     }
 

@@ -53,13 +53,9 @@ class Options extends Model {
 
   public function delete($id){
 
-    $sql = "SELECT count(*) as c FROM products_options WHERE id_option = :id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
-    $data = $sql->fetch();
+    $data = $this->selectCount('products_options', 'id_option', 'id', $id);
 
-    if($data['c'] == '0'){
+    if($data == '0'){
 
       $this->deleteByID('options', $id);
 
