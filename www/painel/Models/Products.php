@@ -10,7 +10,6 @@ class Products extends Model {
 
 	public function getAll():array {
     $array = array();
-
     $sql = "SELECT id, id_category, id_brand, name, stock, price_from, price FROM products";
     $sql = $this->db->query($sql);
 
@@ -141,10 +140,7 @@ class Products extends Model {
 
   public function delete($id){
 
-    $sql = "DELETE FROM products WHERE id=:id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
+    $this->deleteByID('products', $id);
 
   }
 

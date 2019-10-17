@@ -60,10 +60,9 @@ class Options extends Model {
     $data = $sql->fetch();
 
     if($data['c'] == '0'){
-      $sql = "DELETE FROM options WHERE id=:id";
-      $sql = $this->db->prepare($sql);
-      $sql->bindValue(":id", $id);
-      $sql->execute();
+
+      $this->deleteByID('options', $id);
+
     }
   }
 

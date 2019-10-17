@@ -7,15 +7,8 @@ class Permissions extends Model {
 
   public function getPermissionGroupName($id_group){
 
-    $sql = "SELECT name FROM permission_groups WHERE id = :id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id_group);
-    $sql->execute();
-
-    if($sql->rowCount() > 0){
-      $data = $sql->fetch();
-      return $data['name'];
-    }
+    $data = $this->simpleGetId('permission_groups', array('name'), array('id'=>$id_group));
+    return $data['name'];
   }
 
 	public function getAllGroup() {
@@ -36,16 +29,9 @@ class Permissions extends Model {
   }
 
   public function getAllItems(){
-    $array = array();
 
-    $sql = "SELECT * FROM permission_items";
-    $sql = $this->db->query($sql);
+    return $this->simpleSelect('permission_items');
 
-    if($sql->rowCount() > 0){
-      $array = $sql->fetchAll(\PDO::FETCH_ASSOC);
-    }
-
-    return $array;
   }
 
   public function getItem($id){
@@ -130,10 +116,9 @@ class Permissions extends Model {
   }
 
   public function clearLinks($id){
-    $sql = "DELETE FROM permission_links WHERE id_permission_group = :id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
+
+    $this->deleteFieldName('permission_links', 'id_permission_group', 'id', $id);
+
   }
 
   public function linkItemToGroup($id_item, $id_group){
@@ -148,18 +133,14 @@ class Permissions extends Model {
 
   public function deleteItem($id){
 
-    $sql = "DELETE FROM permission_items WHERE id=:id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
+    $this->deleteByID('permission_items', $id);
+
   }
 
   public function deleteItemLinks($id){
 
-    $sql = "DELETE FROM permission_links WHERE id_permission_item=:id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
+    $this->deleteByID('permission_links', $id);
+
   }
 
   public function deleteGroup($id){
@@ -171,15 +152,9 @@ class Permissions extends Model {
 
     if($sql->rowCount() === 0){
 
-      $sql = "DELETE FROM permission_links WHERE id_permission_group = :id_group";
-      $sql = $this->db->prepare($sql);
-      $sql->bindValue(":id_group", $id);
-      $sql->execute();
+      $this->deleteFieldName('permission_links', 'id_permission_group', 'id_group', $id);
 
-      $sql = "DELETE FROM permission_groups WHERE id = :id_group";
-      $sql = $this->db->prepare($sql);
-      $sql->bindValue(":id_group", $id);
-      $sql->execute();
+      $this->deleteFieldName('permission_groups', 'id', 'id_group', $id);
 
     }
 

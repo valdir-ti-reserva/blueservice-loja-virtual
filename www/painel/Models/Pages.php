@@ -33,11 +33,9 @@ class Pages extends Model {
   }
 
   public function del($id){
-    $sql = "DELETE FROM pages WHERE id=:id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
-  }
 
+    $this->deleteByID('pages', $id);
+
+  }
 
 }

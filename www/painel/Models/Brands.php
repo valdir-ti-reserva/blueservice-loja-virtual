@@ -7,7 +7,7 @@ use \Core\Model;
 class Brands extends Model {
 
   public function getAll(){
-    return $this->simpleSelect('brands');
+    return $this->simpleSelect('brands', 'name');
   }
 
   public function addBrand($name){
@@ -43,10 +43,7 @@ class Brands extends Model {
     $data = $sql->fetch();
 
     if($data['c'] == '0'){
-      $sql = "DELETE FROM brands WHERE id=:id";
-      $sql = $this->db->prepare($sql);
-      $sql->bindValue(":id", $id);
-      $sql->execute();
+      $this->deleteByID('brands', $id);
     }
 
   }

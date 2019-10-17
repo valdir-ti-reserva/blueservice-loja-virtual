@@ -7,7 +7,6 @@ class Categories extends Model {
 
 	public function getAll():array {
     $array = array();
-
     $sql = "SELECT * FROM categories ORDER BY sub DESC";
     $sql = $this->db->query($sql);
 
