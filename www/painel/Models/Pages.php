@@ -14,11 +14,7 @@ class Pages extends Model {
   }
 
   public function add($title, $body){
-    $sql = "INSERT INTO pages SET title=:title, body=:body";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":title", $title);
-    $sql->bindValue(":body", $body);
-    $sql->execute();
+    $this->complexInsert('pages', $fields = array('title'=>$title, 'body'=>$body));
   }
 
   public function edit($id, $title, $body){

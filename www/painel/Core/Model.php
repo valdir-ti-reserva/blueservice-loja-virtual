@@ -13,7 +13,7 @@ class Model {
   /*
   * Simple Select
   */
-  public function simpleSelect($table, $orderField = 'id', $order = 'ASC'):array{
+  protected function simpleSelect($table, $orderField = 'id', $order = 'ASC'):array{
     $array = array();
     $sql   = "SELECT * FROM ".$table." ORDER BY ".$orderField." ".$order;
     $sql   = $this->db->query($sql);
@@ -26,7 +26,7 @@ class Model {
   /*
   * Simple Select with fields to return
   */
-  public function simpleSelectFields($table, $fields = array(), $order = 'ASC'):array{
+  protected function simpleSelectFields($table, $fields = array(), $order = 'ASC'):array{
     $array = array();
     $sql   = "SELECT ".implode(',',$fields)." FROM ".$table." ORDER BY id ".$order;
     $sql   = $this->db->query($sql);
@@ -39,7 +39,7 @@ class Model {
   /*
   * Simple Get with ID and fields
   */
-  public function simpleGetId($table, $fields = array(), $find = array()):array{
+  protected function simpleGetId($table, $fields = array(), $find = array()):array{
     $array = array();
     $campo = '';
     $valor = '';
@@ -59,7 +59,7 @@ class Model {
     return $array;
   }
 
-  public function fullSelect($field, $table, $fieldWhere, $fieldBind, $value):array{
+  protected function fullSelect($field, $table, $fieldWhere, $fieldBind, $value):array{
     $array = array();
     $sql = "SELECT ".$field." FROM ".$table." WHERE ".$fieldWhere." = :".$fieldBind;
     $sql = $this->db->prepare($sql);
@@ -76,7 +76,7 @@ class Model {
   /*
   * Select Count with params
   */
-  public function selectCount($table, $field, $fieldBind, $value){
+  protected function selectCount($table, $field, $fieldBind, $value){
     $sql = "SELECT count(*) as c FROM ".$table." WHERE ".$field." = :".$fieldBind."";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":".$fieldBind, $value);
@@ -88,7 +88,7 @@ class Model {
   /*
   * Delete By ID
   */
-  public function deleteByID($table, $id):void{
+  protected function deleteByID($table, $id):void{
     $sql = "DELETE FROM ".$table." WHERE id=:id";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":id", $id);
@@ -98,7 +98,7 @@ class Model {
   /*
   * Delete with field name
   */
-  public function deleteFieldName($table, $field, $fieldBind, $value):void{
+  protected function deleteFieldName($table, $field, $fieldBind, $value):void{
     $sql = "DELETE FROM ".$table." WHERE ".$field." = :".$fieldBind."";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":".$fieldBind, $value);
@@ -106,19 +106,27 @@ class Model {
   }
 
   /*
-  * To insert a simple field
+  * Insert multiple fields
   */
-  public function simpleInsert($table, $field, $value):void{
-    $sql = "INSERT INTO ".$table." SET ".$field."=:".$field."";
+  protected function complexInsert($table, $fields = array()){
+
+    $keys = array_keys($fields);
+    $bind = array();
+    foreach($fields as $k=>$v){
+      $bind[] = ':'.$k;
+    }
+    $sql = "INSERT INTO ".$table." (".implode(',',$keys).") VALUES (".implode(',', $bind).")";
     $sql = $this->db->prepare($sql);
-    $sql->bindValue(":".$field, $value);
+    foreach($fields as $k=>$field){
+      $sql->bindValue(":".$k, $field);
+    }
     $sql->execute();
   }
 
   /*
   * To insert a simple field and return last ID
   */
-  public function simpleInsertLastId($table, $field, $value):int{
+  protected function simpleInsertLastId($table, $field, $value):int{
     $sql = "INSERT INTO ".$table." SET ".$field."=:".$field."";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":".$field, $value);
@@ -130,7 +138,7 @@ class Model {
   /*
   * To update a simple field
   */
-  public function updateSimpleFieldByID($table, $field, $fieldBind, $id, $value):void{
+  protected function updateSimpleFieldByID($table, $field, $fieldBind, $id, $value):void{
     $sql = "UPDATE ".$table." SET ".$field."=:".$fieldBind." WHERE id=:id";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":id",$id);

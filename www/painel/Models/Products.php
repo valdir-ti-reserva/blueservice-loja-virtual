@@ -76,22 +76,13 @@ class Products extends Model {
   }
 
   public function addOptions($id, $options){
-
     foreach($options as $k=>$opt){
-
-      $sql = "INSERT INTO products_options SET id_product=:id_product, id_option=:id_option, p_value=:p_value";
-      $sql = $this->db->prepare($sql);
-      $sql->bindValue(":id_product", $id);
-      $sql->bindValue(":id_option", $k);
-      $sql->bindValue(":p_value", $opt);
-      $sql->execute();
+      $this->complexInsert('products_options', $fields = array('id_product'=>$id, 'id_option'=>$k, 'p_value'=>$opt));
     }
   }
 
   public function getProduct($id):array{
-
     return $this->simpleGetId('products', '*', array('id'=>$id));
-
   }
 
   public function editProduct($product, $id):void{

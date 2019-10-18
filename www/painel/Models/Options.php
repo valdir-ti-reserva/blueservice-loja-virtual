@@ -14,7 +14,7 @@ class Options extends Model {
                 (select count(*) from products_options where products_options.id = options.id) as product_count
                   FROM options";
     }else{
-      $sql = $this->simpleSelect('options');
+      $sql = "SELECT * FROM options";
     }
 
     $sql = $this->db->query($sql);

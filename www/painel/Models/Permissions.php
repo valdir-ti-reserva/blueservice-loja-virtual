@@ -42,6 +42,8 @@ class Permissions extends Model {
 
   public function addItem($name, $slug){
 
+    // $this->complexInsert('permission_items', $fields = array('name'=>$name, 'slug'=>$slug));
+
     $sql = "INSERT INTO permission_items (name, slug) VALUES (:name, :slug)";
     $sql = $this->db->prepare($sql);
     $sql->bindValue(":name", $name);
@@ -83,59 +85,35 @@ class Permissions extends Model {
       }
 
     }
-
     return $array;
-
   }
 
   public function addGroup($name){
-
     $this->simpleInsertLastId('permission_groups', 'name', $name);
-
   }
 
   public function editName($name, $id){
-
     $this->updateSimpleFieldByID('permission_groups', 'name', 'name', $id, $name);
   }
 
   public function clearLinks($id){
-
     $this->deleteFieldName('permission_links', 'id_permission_group', 'id', $id);
-
   }
 
   public function linkItemToGroup($id_item, $id_group){
-    $sql = "INSERT INTO permission_links (id_permission_group, id_permission_item)
-              VALUES (:id_group, :id_item)";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id_item", $id_item);
-    $sql->bindValue(":id_group", $id_group);
-    $sql->execute();
-
+    $this->complexInsert('permission_links', $fields = array('id_permission_group'=>$id_group, 'id_permission_item'=>$id_item));
   }
 
   public function deleteItem($id){
-
     $this->deleteByID('permission_items', $id);
-
   }
 
   public function deleteItemLinks($id){
-
     $this->deleteByID('permission_links', $id);
-
   }
 
   public function deleteGroup($id){
-
     $res = $this->fullSelect('id', 'users', 'id_permission', 'id_group', $id);
-
-//    $sql = "SELECT id FROM users WHERE id_permission = :id_group";
-//    $sql = $this->db->prepare($sql);
-//    $sql->bindValue(":id_group", $id);
-//    $sql->execute();
-
     if(count($res) === 0){
       $this->deleteFieldName('permission_links', 'id_permission_group', 'id_group', $id);
       $this->deleteFieldName('permission_groups', 'id', 'id_group', $id);

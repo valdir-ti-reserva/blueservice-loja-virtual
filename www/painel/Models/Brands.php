@@ -11,7 +11,7 @@ class Brands extends Model {
   }
 
   public function addBrand($name){
-    $this->simpleInsert('brands', 'name', $name);
+    $this->complexInsert('brands', $fields = array('name'=>$name));
   }
 
   public function getBrand($id):array{
