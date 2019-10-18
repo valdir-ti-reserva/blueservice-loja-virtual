@@ -10,9 +10,7 @@ class Pages extends Model {
   }
 
   public function getPage($id):array{
-
     return $this->simpleGetId('pages', '*', array('id'=>$id));
-
   }
 
   public function add($title, $body){
@@ -33,9 +31,6 @@ class Pages extends Model {
   }
 
   public function del($id){
-
     $this->deleteByID('pages', $id);
-
   }
-
 }

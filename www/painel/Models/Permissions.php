@@ -29,23 +29,15 @@ class Permissions extends Model {
   }
 
   public function getAllItems(){
-
     return $this->simpleSelect('permission_items');
-
   }
 
   public function getItem($id){
-
     return $this->simpleGetId('permission_items', '*', array('id'=>$id));
-
   }
 
   public function editItemName($name, $id){
-    $sql = "UPDATE permission_items SET name=:name WHERE id=:id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":name", $name);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
+    $this->updateSimpleFieldByID('permission_items', 'name', 'name', $id, $name);
   }
 
   public function addItem($name, $slug){
@@ -60,9 +52,7 @@ class Permissions extends Model {
   }
 
   public function getPermissions($id_permission){
-
     $array = array();
-
     $sql = "SELECT id_permission_item
               FROM permission_links
                 WHERE id_permission_group = :id_permission";
@@ -99,20 +89,14 @@ class Permissions extends Model {
   }
 
   public function addGroup($name){
-    $sql = "INSERT INTO permission_groups (name) VALUES (:name)";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":name", $name);
-    $sql->execute();
 
-    return $this->db->lastInsertId();
+    $this->simpleInsertLastId('permission_groups', 'name', $name);
+
   }
 
   public function editName($name, $id){
-    $sql = "UPDATE permission_groups SET name = :name WHERE id= :id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":name", $name);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
+
+    $this->updateSimpleFieldByID('permission_groups', 'name', 'name', $id, $name);
   }
 
   public function clearLinks($id){
@@ -145,19 +129,16 @@ class Permissions extends Model {
 
   public function deleteGroup($id){
 
-    $sql = "SELECT id FROM users WHERE id_permission = :id_group";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id_group", $id);
-    $sql->execute();
+    $res = $this->fullSelect('id', 'users', 'id_permission', 'id_group', $id);
 
-    if($sql->rowCount() === 0){
+//    $sql = "SELECT id FROM users WHERE id_permission = :id_group";
+//    $sql = $this->db->prepare($sql);
+//    $sql->bindValue(":id_group", $id);
+//    $sql->execute();
 
+    if(count($res) === 0){
       $this->deleteFieldName('permission_links', 'id_permission_group', 'id_group', $id);
-
       $this->deleteFieldName('permission_groups', 'id', 'id_group', $id);
-
     }
-
   }
-
 }

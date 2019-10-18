@@ -22,7 +22,6 @@ class Categories extends Model {
 
       while( $this->stillNeed($array) ){
         $this->organizeCategory($array);
-
       }
 
     }
@@ -60,9 +59,7 @@ class Categories extends Model {
   }
 
   public function getCategory($id):array{
-
     return $this->simpleGetId('categories', '*', array('id'=>$id));
-
   }
 
   public function editCategory($name, $sub, $id){
@@ -82,13 +79,10 @@ class Categories extends Model {
       $cats[] = $id;
     }
 
-    $sql = "SELECT id FROM categories WHERE sub=:id";
-    $sql = $this->db->prepare($sql);
-    $sql->bindValue(":id", $id);
-    $sql->execute();
+    $res = $this->simpleGetId('categories', ['id'], array('sub'=>$id));
 
-    if($sql->rowCount() > 0){
-      $data = $sql->fetchAll();
+    if(!empty($res)){
+      $data = $res;
 
       foreach($data as $item){
         if(!in_array($item['id'], $cats)){

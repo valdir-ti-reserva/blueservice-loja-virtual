@@ -10,14 +10,13 @@ class Products extends Model {
 
 	public function getAll():array {
     $array = array();
-    $sql = "SELECT id, id_category, id_brand, name, stock, price_from, price FROM products";
-    $sql = $this->db->query($sql);
+    $res = $this->simpleSelectFields('products', ['id', 'id_category', 'id_brand','name', 'stock', 'price_from', 'price']);
 
-    if($sql->rowCount() > 0){
+    if(!empty($res)){
       $c = new Categories();
       $b = new Brands();
 
-      $array = $sql->fetchAll(\PDO::FETCH_ASSOC);
+      $array = $res;
 
       foreach($array as $k => $item){
         $brandInfo = $b->getBrand($item['id_brand']);
@@ -139,9 +138,7 @@ class Products extends Model {
   }
 
   public function delete($id){
-
     $this->deleteByID('products', $id);
-
   }
 
 }
