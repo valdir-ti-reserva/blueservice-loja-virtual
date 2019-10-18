@@ -1,2 +1,3 @@
-www/painel/vendor/
+www/painel/vendor
 .idea
+www/painel/composer.lock
